@@ -178,7 +178,7 @@ public class TChunk : MonoBehaviour
         mesh.RecalculateNormals();
 
         GetComponent<MeshFilter>().mesh = mesh;
-
+        GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
     void CreateSideMeshObject()
@@ -186,6 +186,7 @@ public class TChunk : MonoBehaviour
         sideMesh = new GameObject($"sidemesh {chunkCoordX}/{chunkCoordZ}");
         sideMesh.AddComponent(typeof(MeshFilter));
         sideMesh.AddComponent(typeof(MeshRenderer));
+        sideMesh.AddComponent(typeof(MeshCollider));
         sideMesh.transform.parent = transform;
 
         sideMesh.GetComponent<Renderer>().material = Resources.Load("Materials/sidemeshMaterial", typeof(Material)) as Material;
@@ -203,5 +204,6 @@ public class TChunk : MonoBehaviour
         mesh.RecalculateNormals();
         //transform.Find($"sidemesh {chunkCoordX}/{chunkCoordZ}").GetComponent<MeshFilter>().mesh = mesh;
         sideMesh.GetComponent<MeshFilter>().mesh = mesh;
+        sideMesh.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 }

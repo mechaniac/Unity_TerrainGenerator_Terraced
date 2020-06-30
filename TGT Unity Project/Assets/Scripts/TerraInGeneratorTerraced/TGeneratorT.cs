@@ -9,6 +9,7 @@ public class TGeneratorT : MonoBehaviour
 
     public Texture2D heightMap;
     public int widthPerPixel;
+    public float heightMultiplier;
 
     public Tyle tylePrefab;
     public VPillar vPillarPrefab;
@@ -107,7 +108,7 @@ public class TGeneratorT : MonoBehaviour
         {
             for (int x = 0; x < tylesX; x++, i++)
             {
-                tyles[i].height = heightMap.GetPixel(x, z).grayscale;
+                tyles[i].height = heightMap.GetPixel(x, z).grayscale *heightMultiplier;
             }
         }
     }
