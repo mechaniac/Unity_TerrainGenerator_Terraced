@@ -5,3 +5,6 @@ height from pixelimage.
 cliffs from maxDistanceThreshold
 
 ![alt text](https://github.com/mechaniac/Unity_TerrainGenerator_Terraced/blob/master/documentation/Screenshot_02.jpg?raw=true)
+
+latest commit:
+![alt text](https://github.com/mechaniac/Unity_TerrainGenerator_Terraced/blob/master/documentation/Screenshot_03.jpg?raw=true)
