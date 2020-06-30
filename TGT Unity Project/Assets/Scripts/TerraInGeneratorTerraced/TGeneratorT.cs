@@ -11,13 +11,18 @@ public class TGeneratorT : MonoBehaviour
     public int widthPerPixel;
     public float heightMultiplier;
 
+    public bool setMapToSceneCenter;
+
     public Tyle tylePrefab;
     public VPillar vPillarPrefab;
 
+    [HideInInspector]
     public Tyle[] tyles;
     VPillar[] vPillars;
 
+    [HideInInspector]
     public int tylesX;
+    [HideInInspector]
     public int tylesZ;
 
     public float maxSlopeHeight = .35f;

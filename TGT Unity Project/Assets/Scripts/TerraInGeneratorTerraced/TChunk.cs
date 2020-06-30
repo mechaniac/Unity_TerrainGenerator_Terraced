@@ -15,6 +15,7 @@ public class TChunk : MonoBehaviour
 
     List<Vector3> sideVertices;
     List<int> sideTriangles;
+    List<Vector2> sideUv;
 
     TGeneratorT tgt;
     ChunkGenerator cg;
@@ -50,9 +51,13 @@ public class TChunk : MonoBehaviour
 
     void AddTopQuad(int verticesStartIndex, Vector3[] verticesFromTyle)
     {
+        Vector3 chunkOffset = new Vector3(chunkCoordX * cg.tylesPerChunkX * tgt.widthPerPixel, 0, chunkCoordZ * cg.tylesPerChunkZ * tgt.widthPerPixel);
+
         for (int i = 0; i < verticesFromTyle.Length; i++)
         {
-            vertices[verticesStartIndex + i] = verticesFromTyle[i];
+
+            vertices[verticesStartIndex + i] = verticesFromTyle[i] - chunkOffset;
+            //uv[verticesStartIndex + i] = new Vector2( verticesFromTyle[i].x, verticesFromTyle[i].z);
         }
 
         int tSI = verticesStartIndex / 4 * 6;
@@ -63,6 +68,19 @@ public class TChunk : MonoBehaviour
         triangles[tSI + 4] = verticesStartIndex + 2;
         triangles[tSI + 5] = verticesStartIndex + 1;
 
+        Vector2[] uvPerQuad = new Vector2[4];
+
+        uvPerQuad[0] = new Vector2(0, 0);
+        uvPerQuad[1] = new Vector2(1, 0);
+        uvPerQuad[2] = new Vector2(1, 1);
+        uvPerQuad[3] = new Vector2(0, 1);
+
+        for (int i = 0; i < uvPerQuad.Length; i++)
+        {
+            uv[verticesStartIndex + i] = uvPerQuad[i];
+        }
+
+
     }
 
     public void CreateSidemeshFromTyles()
@@ -71,6 +89,7 @@ public class TChunk : MonoBehaviour
 
         sideVertices = new List<Vector3>();
         sideTriangles = new List<int>();
+        sideUv = new List<Vector2>();
 
         for (int z = 0, i = 0; z < cg.tylesPerChunkZ; z++)
         {
@@ -82,7 +101,7 @@ public class TChunk : MonoBehaviour
                 {
                     if (t.neighbours[ti] != null)
                     {
-                        if (IsDirectionStepped(t,ti))
+                        if (IsDirectionStepped(t, ti))
                         {
                             AddSideQuad(t, t.neighbours[ti], ti);
                         }
@@ -128,6 +147,17 @@ public class TChunk : MonoBehaviour
 
     void AddSideQuad(Tyle ty, Tyle neighbourTy, int neighbourDirection)
     {
+        float chunkOffsetX = 0f;
+        float chunkOffsetZ = 0f;
+
+        if (tgt.setMapToSceneCenter)
+        {
+            chunkOffsetX = -cg.tylesPerChunkX * cg.chunkCountX * tgt.widthPerPixel / 2f;
+            chunkOffsetZ = -cg.tylesPerChunkZ * cg.chunkCountZ * tgt.widthPerPixel / 2f;
+        }
+        Vector3 offsetVector = new Vector3(chunkOffsetX, 0, chunkOffsetZ);
+
+
         int startVertex = sideVertices.Count;
         Vector3[] v = new Vector3[4];
 
@@ -149,12 +179,12 @@ public class TChunk : MonoBehaviour
                 break;
         }
 
+        
 
-
-        v[0] = ty.GetVertice(vIndeces[0]);
-        v[1] = ty.GetVertice(vIndeces[1]);
-        v[2] = neighbourTy.GetVertice(vIndeces[2]);
-        v[3] = neighbourTy.GetVertice(vIndeces[3]);
+        v[0] = ty.GetVertice(vIndeces[0]) + offsetVector;
+        v[1] = ty.GetVertice(vIndeces[1]) +offsetVector;
+        v[2] = neighbourTy.GetVertice(vIndeces[2]) +offsetVector;
+        v[3] = neighbourTy.GetVertice(vIndeces[3]) +offsetVector;
 
         int[] t = new int[6];
 
@@ -165,8 +195,17 @@ public class TChunk : MonoBehaviour
         t[4] = startVertex + 3;
         t[5] = startVertex + 2;
 
+        Vector2[] uv = new Vector2[4];
+
+        uv[0] = new Vector2(0, v[0].y / tgt.widthPerPixel);
+        uv[1] = new Vector2(1, v[1].y / tgt.widthPerPixel);
+        uv[2] = new Vector2(0, v[2].y / tgt.widthPerPixel);
+        uv[3] = new Vector2(1, v[3].y / tgt.widthPerPixel);
+
+
         sideVertices.AddRange(v);
         sideTriangles.AddRange(t);
+        sideUv.AddRange(uv);
     }
 
     public void ReGenerateMesh()
@@ -175,6 +214,7 @@ public class TChunk : MonoBehaviour
         mesh.name = $"chunkmesh {chunkCoordX}/{chunkCoordZ}";
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uv;
         mesh.RecalculateNormals();
 
         GetComponent<MeshFilter>().mesh = mesh;
@@ -189,7 +229,7 @@ public class TChunk : MonoBehaviour
         sideMesh.AddComponent(typeof(MeshCollider));
         sideMesh.transform.parent = transform;
 
-        sideMesh.GetComponent<Renderer>().material = Resources.Load("Materials/sidemeshMaterial", typeof(Material)) as Material;
+        sideMesh.GetComponent<Renderer>().material = Resources.Load("Materials/sidemeshMat", typeof(Material)) as Material;
 
         Debug.Log($"sideMesh renderer = {sideMesh.GetComponent<Renderer>().material}");
 
@@ -201,6 +241,8 @@ public class TChunk : MonoBehaviour
 
         mesh.vertices = sideVertices.ToArray();
         mesh.triangles = sideTriangles.ToArray();
+        mesh.uv = sideUv.ToArray();
+
         mesh.RecalculateNormals();
         //transform.Find($"sidemesh {chunkCoordX}/{chunkCoordZ}").GetComponent<MeshFilter>().mesh = mesh;
         sideMesh.GetComponent<MeshFilter>().mesh = mesh;

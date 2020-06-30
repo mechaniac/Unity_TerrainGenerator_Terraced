@@ -13,7 +13,9 @@ public class ChunkGenerator : MonoBehaviour
     public int tylesPerChunkX = 8;
     public int tylesPerChunkZ = 8;
 
+    [HideInInspector]
     public int chunkCountX;
+    [HideInInspector]
     public int chunkCountZ;
 
     private void Awake()
@@ -47,13 +49,22 @@ public class ChunkGenerator : MonoBehaviour
     {
         chunks = new TChunk[chunkCountX * chunkCountZ];
 
+        float chunkOffsetX = 0f;
+        float chunkOffsetZ = 0f;
+
+        if (tgt.setMapToSceneCenter)
+        {
+            chunkOffsetX = -tylesPerChunkX * chunkCountX * tgt.widthPerPixel / 2f;
+            chunkOffsetZ = -tylesPerChunkZ * chunkCountZ * tgt.widthPerPixel / 2f;
+        }
+
         for (int z = 0, i = 0; z < chunkCountZ; z++)
         {
             for (int x = 0; x < chunkCountX; x++, i++)
             {
                 TChunk c = chunks[i] = Instantiate(chunkPrefab);
                 c.gameObject.SetActive(true);
-                //c.transform.position = new Vector3(x * tylesPerChunkX * tgt.widthPerPixel, 0, z * tylesPerChunkZ * tgt.widthPerPixel);
+                c.transform.position = new Vector3(x * tylesPerChunkX * tgt.widthPerPixel + chunkOffsetX, 0, z * tylesPerChunkZ * tgt.widthPerPixel + chunkOffsetZ);
                 c.InitializeChunk(x, z, i, tgt, this);
                 c.CreateMeshFromTyles();
                 c.ReGenerateMesh();
