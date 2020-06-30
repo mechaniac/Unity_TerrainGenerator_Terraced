@@ -1,4 +1,4 @@
-# Unity_TerrainGenerator_Terraced
+# Unity_TerrainGenerator_Terraced (WiP)
 smooth slopes / sharp cliffs
 
 A Terrain Generator based on pixel height maps. One tile is represented by one pixel.
