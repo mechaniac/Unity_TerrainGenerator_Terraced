@@ -4,13 +4,13 @@ smooth slopes / sharp cliffs
 A Terrain Generator based on pixel height maps. One tile is represented by one pixel.
 
 Draw a (power of 2 sized) texture with brightness information. 
-define generation parameters:
-    width per pixel (simple multiplier)
-    height multiplier (base values are: black pixel is height 0, white pixel height 1)
-    MAX SLOPE HEIGHT: Map stores height difference between tiles(pixels). If height difference between neighbours is bigger = cliff.
+### Terrain Generator (Component):
+- width per pixel (simple multiplier)
+- height multiplier (base values are: black pixel is height 0, white pixel height 1)
+- MAX SLOPE HEIGHT: Map stores height difference between tiles(pixels). If height difference between neighbours is bigger = cliff.
     
-Chunk Generator:
-    creates the meshes. define chunk size (tyles per chunk)
+### Chunk Generator (Component):
+- creates the meshes. define chunk size (tyles per chunk)
 
 height from pixelimage.
 cliffs from maxDistanceThreshold (Max Slope Height)
