@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TGeneratorT))]
+[ExecuteInEditMode]
 public class ChunkGenerator : MonoBehaviour
 {
     TGeneratorT tgt;

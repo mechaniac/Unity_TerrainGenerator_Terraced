@@ -38,6 +38,43 @@ public class TGeneratorT : MonoBehaviour
     }
     private void Start()
     {
+        DeleteTerrain();
+
+        InstantiateTyles();
+        SetTileNeighbours();
+        InstantiatePillars();
+        SetTylesHeightFromHeightmap();
+        AssignTylesToPillars();
+        SetPillarVerticesFromTyles();
+        ContractAllVerticeHeights(maxSlopeHeight);
+        cg.GenerateChunkMeshes();
+    }
+
+    public void DeleteTerrain()
+    {
+        // Names of objects to delete
+        string[] targetNames = { "pillarholder", "chunkHolder", "tylesHolder" };
+
+        foreach (string targetName in targetNames)
+        {
+            // Find objects in the hierarchy with the given name
+            Transform target = transform.Find(targetName);
+
+            if (target != null)
+            {
+                // Destroy the object and all its children immediately
+                DestroyImmediate(target.gameObject);
+                Debug.Log($"{targetName} and its children have been deleted.");
+            }
+        }
+    }
+    public void GenerateTerrain()
+    {
+        DeleteTerrain();
+        Debug.Log("Terrain generated with maxSlopeHeight: " + maxSlopeHeight);
+        // Add your terrain generation logic here
+        InitializeMap();
+
         InstantiateTyles();
         SetTileNeighbours();
         InstantiatePillars();
