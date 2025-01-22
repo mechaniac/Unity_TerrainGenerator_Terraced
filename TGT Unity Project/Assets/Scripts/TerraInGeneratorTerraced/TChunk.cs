@@ -179,12 +179,12 @@ public class TChunk : MonoBehaviour
                 break;
         }
 
-        
+
 
         v[0] = ty.GetVertice(vIndeces[0]) + offsetVector;
-        v[1] = ty.GetVertice(vIndeces[1]) +offsetVector;
-        v[2] = neighbourTy.GetVertice(vIndeces[2]) +offsetVector;
-        v[3] = neighbourTy.GetVertice(vIndeces[3]) +offsetVector;
+        v[1] = ty.GetVertice(vIndeces[1]) + offsetVector;
+        v[2] = neighbourTy.GetVertice(vIndeces[2]) + offsetVector;
+        v[3] = neighbourTy.GetVertice(vIndeces[3]) + offsetVector;
 
         int[] t = new int[6];
 
@@ -223,15 +223,21 @@ public class TChunk : MonoBehaviour
 
     void CreateSideMeshObject()
     {
-        sideMesh = new GameObject($"sidemesh {chunkCoordX}/{chunkCoordZ}");
+        sideMesh = new GameObject($"{tgt.mapName}_sidemesh_{chunkCoordX}/{chunkCoordZ}");
         sideMesh.AddComponent(typeof(MeshFilter));
         sideMesh.AddComponent(typeof(MeshRenderer));
         sideMesh.AddComponent(typeof(MeshCollider));
         sideMesh.transform.parent = transform;
 
-        sideMesh.GetComponent<Renderer>().material = Resources.Load("Materials/sidemeshMat", typeof(Material)) as Material;
+        // Ensure the material is shared across all meshes
 
-        Debug.Log($"sideMesh renderer = {sideMesh.GetComponent<Renderer>().material}");
+        var renderer = sideMesh.GetComponent<Renderer>();
+
+        if (renderer.sharedMaterial != tgt.sideMeshMat)
+        {
+            renderer.sharedMaterial = tgt.sideMeshMat; // Use sharedMaterial to avoid instances
+        }
+        // Debug.Log($"Material Instance ID: {sideMesh.GetComponent<Renderer>().sharedMaterial.GetInstanceID()}");
 
     }
 

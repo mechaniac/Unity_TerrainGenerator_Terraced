@@ -14,6 +14,7 @@ public class Tyle : MonoBehaviour
 
     public Tyle[] neighbours;
 
+
     public Vector3[] GetVertices()
     {
         v = new Vector3[4];

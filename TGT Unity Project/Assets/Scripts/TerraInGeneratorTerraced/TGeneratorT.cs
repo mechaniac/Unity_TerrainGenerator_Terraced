@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -8,6 +9,10 @@ public class TGeneratorT : MonoBehaviour
     ChunkGenerator cg;
 
     public Texture2D heightMap;
+
+    public Material topMeshMat;
+    public Material sideMeshMat;
+    public string mapName;
     public int widthPerPixel;
     public float heightMultiplier;
 
@@ -50,6 +55,10 @@ public class TGeneratorT : MonoBehaviour
         tylesX = heightMap.width;
         tylesZ = heightMap.height;
 
+        string assetPath = AssetDatabase.GetAssetPath(heightMap);
+        mapName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+        Debug.Log("File Name: " + mapName);
+
         cg = GetComponent<ChunkGenerator>();
     }
 
@@ -64,10 +73,12 @@ public class TGeneratorT : MonoBehaviour
             for (int x = 0; x < tylesX; x++, i++)
             {
                 Tyle t = tyles[i] = Instantiate(tylePrefab);
+
                 t.transform.position = new Vector3(x * widthPerPixel + widthPerPixel / 2f, 0, z * widthPerPixel + widthPerPixel / 2f);
                 t.gameObject.SetActive(true);
                 t.transform.SetParent(tylesHolder.transform, true);
                 t.InstantiateTyle();
+                t.name = $"Tile_{x}_{z}";
             }
         }
     }
@@ -113,7 +124,7 @@ public class TGeneratorT : MonoBehaviour
         {
             for (int x = 0; x < tylesX; x++, i++)
             {
-                tyles[i].height = heightMap.GetPixel(x, z).grayscale *heightMultiplier;
+                tyles[i].height = heightMap.GetPixel(x, z).grayscale * heightMultiplier;
             }
         }
     }
@@ -121,7 +132,7 @@ public class TGeneratorT : MonoBehaviour
     void InstantiatePillars()
     {
         vPillars = new VPillar[(tylesX + 1) * (tylesZ + 1)];
-        GameObject pillarHolder = new GameObject("pillarhOlder");
+        GameObject pillarHolder = new GameObject("pillarholder");
         pillarHolder.transform.parent = transform;
 
 
@@ -134,6 +145,7 @@ public class TGeneratorT : MonoBehaviour
                 p.gameObject.SetActive(true);
                 p.InstantiatePillar();
                 p.transform.parent = pillarHolder.transform;
+                p.name = $"Pillar_{x}_{z}";
             }
         }
     }

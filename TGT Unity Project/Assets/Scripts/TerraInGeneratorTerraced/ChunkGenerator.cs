@@ -7,6 +7,8 @@ public class ChunkGenerator : MonoBehaviour
 {
     TGeneratorT tgt;
 
+    private Transform chunkHolder;
+
     public TChunk chunkPrefab;
     TChunk[] chunks;
 
@@ -42,6 +44,14 @@ public class ChunkGenerator : MonoBehaviour
 
     public void GenerateChunkMeshes()
     {
+        GameObject holderObject = new GameObject("chunkHolder");
+
+        // Get the Transform component
+        chunkHolder = holderObject.transform;
+        if (tgt != null)
+        {
+            chunkHolder.SetParent(tgt.gameObject.transform);
+        }
         CreateChunks();
     }
 
@@ -63,8 +73,13 @@ public class ChunkGenerator : MonoBehaviour
             for (int x = 0; x < chunkCountX; x++, i++)
             {
                 TChunk c = chunks[i] = Instantiate(chunkPrefab);
+                c.name = tgt.mapName + "_chunk_" + x + ", " + z;
                 c.gameObject.SetActive(true);
                 c.transform.position = new Vector3(x * tylesPerChunkX * tgt.widthPerPixel + chunkOffsetX, 0, z * tylesPerChunkZ * tgt.widthPerPixel + chunkOffsetZ);
+                if (chunkHolder != null)
+                {
+                    c.transform.SetParent(chunkHolder);
+                }
                 c.InitializeChunk(x, z, i, tgt, this);
                 c.CreateMeshFromTyles();
                 c.ReGenerateMesh();
