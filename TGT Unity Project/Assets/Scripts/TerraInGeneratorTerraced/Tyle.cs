@@ -17,7 +17,7 @@ public class Tyle : MonoBehaviour
 
     public Vector3[] GetVertices()
     {
-        v = new Vector3[4];
+        v = new Vector3[4]; 
 
         for (int i = 0; i < vPillars.Length; i++)
         {
@@ -36,7 +36,7 @@ public class Tyle : MonoBehaviour
         return v;
     }
 
-    public Vector3 GetVertice(int i)
+    public Vector3 GetVertex(int i)
     {
         Vector3 v = new Vector3(vPillars[i].transform.position.x, vPillars[i].vertexHeights[i], vPillars[i].transform.position.z);
 

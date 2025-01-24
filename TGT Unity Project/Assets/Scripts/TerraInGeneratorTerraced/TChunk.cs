@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
@@ -8,6 +9,9 @@ public class TChunk : MonoBehaviour
     int id;
     int chunkCoordX;
     int chunkCoordZ;
+
+    int quadCountHelper;
+    int chunkCountHelper;
 
     Vector3[] vertices;
     int[] triangles;
@@ -85,6 +89,8 @@ public class TChunk : MonoBehaviour
 
     public void CreateSidemeshFromTyles()
     {
+        Debug.Log($"ChunkCountHelper ChunkCountHelper ChunkCountHelper ChunkCountHelper ChunkCountHelper ChunkCountHelper: {chunkCountHelper ++}");
+        Debug.Log("SideMeshCreation");
         if (sideMesh == null) CreateSideMeshObject();
 
         sideVertices = new List<Vector3>();
@@ -93,6 +99,7 @@ public class TChunk : MonoBehaviour
 
         for (int z = 0, i = 0; z < cg.tylesPerChunkZ; z++)
         {
+            
             for (int x = 0; x < cg.tylesPerChunkX; x++, i += 4)
             {
                 Tyle t = tgt.tyles[x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ];
@@ -103,6 +110,8 @@ public class TChunk : MonoBehaviour
                     {
                         if (IsDirectionStepped(t, ti))
                         {
+                            Debug.Log($"QuadCountHelper: {quadCountHelper++}");
+                            Debug.Log($"sideMesh add Quad, {z}, {i}, {x}, {ti}");
                             AddSideQuad(t, t.neighbours[ti], ti);
                         }
                     }
@@ -137,6 +146,7 @@ public class TChunk : MonoBehaviour
             t.vPillars[vI[1]].vertexHeights[vI[0]] != t.vPillars[vI[1]].vertexHeights[vI[3]]
             )
         {
+            // Debug.Log("Step Found!");
             return true;
         }
 
@@ -147,6 +157,8 @@ public class TChunk : MonoBehaviour
 
     void AddSideQuad(Tyle ty, Tyle neighbourTy, int neighbourDirection)
     {
+        //OffsetFromCenter Prep
+
         float chunkOffsetX = 0f;
         float chunkOffsetZ = 0f;
 
@@ -157,9 +169,12 @@ public class TChunk : MonoBehaviour
         }
         Vector3 offsetVector = new Vector3(chunkOffsetX, 0, chunkOffsetZ);
 
+        // Begin Code
 
-        int startVertex = sideVertices.Count;
-        Vector3[] v = new Vector3[4];
+
+        int startVertex = sideVertices.Count;   //continuing the list
+
+        Vector3[] v = new Vector3[4];   //the VERTICES
 
         int[] vIndeces;
 
@@ -181,10 +196,10 @@ public class TChunk : MonoBehaviour
 
 
 
-        v[0] = ty.GetVertice(vIndeces[0]) + offsetVector;
-        v[1] = ty.GetVertice(vIndeces[1]) + offsetVector;
-        v[2] = neighbourTy.GetVertice(vIndeces[2]) + offsetVector;
-        v[3] = neighbourTy.GetVertice(vIndeces[3]) + offsetVector;
+        v[0] = ty.GetVertex(vIndeces[0]) + offsetVector;
+        v[1] = ty.GetVertex(vIndeces[1]) + offsetVector;
+        v[2] = neighbourTy.GetVertex(vIndeces[2]) + offsetVector;
+        v[3] = neighbourTy.GetVertex(vIndeces[3]) + offsetVector;
 
         int[] t = new int[6];
 
@@ -215,10 +230,64 @@ public class TChunk : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uv;
-        mesh.RecalculateNormals();
+        // mesh.RecalculateNormals();
+        RecalculateNormalsSeamless(mesh);
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
+    }
+
+    public void ReGenerateSidemesh()
+    {
+        Mesh mesh = new Mesh();
+
+        mesh.vertices = sideVertices.ToArray();
+        mesh.triangles = sideTriangles.ToArray();
+        mesh.uv = sideUv.ToArray();
+
+        // mesh.RecalculateNormals();
+        RecalculateNormalsSeamless(mesh);
+        //transform.Find($"sidemesh {chunkCoordX}/{chunkCoordZ}").GetComponent<MeshFilter>().mesh = mesh;
+        sideMesh.GetComponent<MeshFilter>().mesh = mesh;
+        sideMesh.GetComponent<MeshCollider>().sharedMesh = mesh;
+    }
+
+    static void RecalculateNormalsSeamless(Mesh mesh)
+    {
+        var trianglesOriginal = mesh.triangles;
+        var triangles = trianglesOriginal.ToArray();
+
+        var vertices = mesh.vertices;
+
+        var mergeIndices = new Dictionary<int, int>();
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            var vertexHash = vertices[i].GetHashCode();
+
+            if (mergeIndices.TryGetValue(vertexHash, out var index))
+            {
+                for (int j = 0; j < triangles.Length; j++)
+                    if (triangles[j] == i)
+                        triangles[j] = index;
+            }
+            else
+                mergeIndices.Add(vertexHash, i);
+        }
+
+        mesh.triangles = triangles;
+
+        var normals = new Vector3[vertices.Length];
+
+        mesh.RecalculateNormals();
+        var newNormals = mesh.normals;
+
+        for (int i = 0; i < vertices.Length; i++)
+            if (mergeIndices.TryGetValue(vertices[i].GetHashCode(), out var index))
+                normals[i] = newNormals[index];
+
+        mesh.triangles = trianglesOriginal;
+        mesh.normals = normals;
     }
 
     void CreateSideMeshObject()
@@ -241,17 +310,5 @@ public class TChunk : MonoBehaviour
 
     }
 
-    public void ReGenerateSidemesh()
-    {
-        Mesh mesh = new Mesh();
 
-        mesh.vertices = sideVertices.ToArray();
-        mesh.triangles = sideTriangles.ToArray();
-        mesh.uv = sideUv.ToArray();
-
-        mesh.RecalculateNormals();
-        //transform.Find($"sidemesh {chunkCoordX}/{chunkCoordZ}").GetComponent<MeshFilter>().mesh = mesh;
-        sideMesh.GetComponent<MeshFilter>().mesh = mesh;
-        sideMesh.GetComponent<MeshCollider>().sharedMesh = mesh;
-    }
 }

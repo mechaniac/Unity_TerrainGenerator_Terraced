@@ -38,16 +38,7 @@ public class TGeneratorT : MonoBehaviour
     }
     private void Start()
     {
-        DeleteTerrain();
-
-        InstantiateTyles();
-        SetTileNeighbours();
-        InstantiatePillars();
-        SetTylesHeightFromHeightmap();
-        AssignTylesToPillars();
-        SetPillarVerticesFromTyles();
-        ContractAllVerticeHeights(maxSlopeHeight);
-        cg.GenerateChunkMeshes();
+        GenerateTerrain();
     }
 
     public void DeleteTerrain()
@@ -64,14 +55,14 @@ public class TGeneratorT : MonoBehaviour
             {
                 // Destroy the object and all its children immediately
                 DestroyImmediate(target.gameObject);
-                Debug.Log($"{targetName} and its children have been deleted.");
+                // Debug.Log($"{targetName} and its children have been deleted.");
             }
         }
     }
-    public void GenerateTerrain()
+    public void GenerateTerrain() //MAIN Stack
     {
         DeleteTerrain();
-        Debug.Log("Terrain generated with maxSlopeHeight: " + maxSlopeHeight);
+        // Debug.Log("Terrain generated with maxSlopeHeight: " + maxSlopeHeight);
         // Add your terrain generation logic here
         InitializeMap();
 
