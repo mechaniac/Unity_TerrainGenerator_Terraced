@@ -8,13 +8,15 @@ public class TGeneratorT : MonoBehaviour
 {
     ChunkGenerator cg;
 
+    public System.Random random;
+
     public Texture2D heightMap;
 
     public Material topMeshMat;
     public Material sideMeshMat;
     public string mapName;
     public int widthPerPixel;
-    public float heightMultiplier;
+    
 
     public bool setMapToSceneCenter;
 
@@ -31,6 +33,8 @@ public class TGeneratorT : MonoBehaviour
     public int tylesZ;
 
     public float maxSlopeHeight = .35f;
+    public float heightMultiplier;
+    public float maxRandomValue = 0.0f;
 
     private void Awake()
     {
@@ -61,6 +65,7 @@ public class TGeneratorT : MonoBehaviour
     }
     public void GenerateTerrain() //MAIN Stack
     {
+        random = new System.Random(123);
         DeleteTerrain();
         // Debug.Log("Terrain generated with maxSlopeHeight: " + maxSlopeHeight);
         // Add your terrain generation logic here
@@ -71,7 +76,7 @@ public class TGeneratorT : MonoBehaviour
         InstantiatePillars();
         SetTylesHeightFromHeightmap();
         AssignTylesToPillars();
-        SetPillarVerticesFromTyles();
+        SetPillarVerticesFromTyles(maxRandomValue);
         ContractAllVerticeHeights(maxSlopeHeight);
         cg.GenerateChunkMeshes();
     }
@@ -171,7 +176,7 @@ public class TGeneratorT : MonoBehaviour
                 VPillar p = vPillars[i] = Instantiate(vPillarPrefab);
                 p.transform.position = new Vector3(x * widthPerPixel, 0, z * widthPerPixel);
                 p.gameObject.SetActive(true);
-                p.InstantiatePillar();
+                p.InstantiatePillar(random);
                 p.transform.parent = pillarHolder.transform;
                 p.name = $"Pillar_{x}_{z}";
             }
@@ -211,11 +216,11 @@ public class TGeneratorT : MonoBehaviour
         }
     }
 
-    void SetPillarVerticesFromTyles()
+    void SetPillarVerticesFromTyles(float randomValue)
     {
         for (int i = 0; i < vPillars.Length; i++)
         {
-            vPillars[i].SetVertexHeightsFromTyles();
+            vPillars[i].SetVertexHeightsFromTyles(randomValue);
         }
     }
 

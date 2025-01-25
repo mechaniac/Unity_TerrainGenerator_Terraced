@@ -23,6 +23,11 @@ public class ChunkGenerator : MonoBehaviour
 
     private void Awake()
     {
+        InitializeChunkHolder();
+    }
+
+    void InitializeChunkHolder()
+    {
         tgt = GetComponent<TGeneratorT>();
 
         if (tgt.heightMap.width % 2 != 0)
@@ -43,7 +48,7 @@ public class ChunkGenerator : MonoBehaviour
 
     }
 
-    public void GenerateChunkMeshes()
+    public void GenerateChunkMeshes() //called from MAIN stack
     {
         GameObject holderObject = new GameObject("chunkHolder");
 
@@ -82,11 +87,8 @@ public class ChunkGenerator : MonoBehaviour
                     c.transform.SetParent(chunkHolder);
                 }
                 c.InitializeChunk(x, z, i, tgt, this);
-                c.CreateMeshFromTyles();
-                c.ReGenerateMesh();
-
-                c.CreateSidemeshFromTyles();
-                c.ReGenerateSidemesh();
+                
+                c.GenerateMeshes();
             }
         }
     }

@@ -13,9 +13,20 @@ public class TChunk : MonoBehaviour
     int quadCountHelper;
     int chunkCountHelper;
 
+
+    //TEMP Variables
+
+    List<int> triangles_temp;
+    List<Vector2> uv_temp;
+    List<Vector3> vertices_temp;
+    List<Vector3> normals_temp;
+
+    // ------------
+
     Vector3[] vertices;
     int[] triangles;
     Vector2[] uv;
+    Vector3[] normals;
 
     List<Vector3> sideVertices;
     List<int> sideTriangles;
@@ -41,56 +52,99 @@ public class TChunk : MonoBehaviour
         uv = new Vector2[vertices.Length];
     }
 
-    public void CreateMeshFromTyles()
+    public void GenerateMeshes()
+    {
+        InitializeTempLists();
+        SetVerticesFromTyles();
+        FinalizeListsToArrays();
+        GenerateMesh();
+
+        SetSideVerticesFromTyles();
+        GenerateSidemesh();
+    }
+
+
+    public void InitializeTempLists()
+    {
+        triangles_temp = new List<int>();
+        uv_temp = new List<Vector2>();
+        vertices_temp = new List<Vector3>();
+        normals_temp = new List<Vector3>();
+    }
+
+    public void FinalizeListsToArrays()
+    {
+        vertices = vertices_temp.ToArray();
+        triangles = triangles_temp.ToArray();
+        uv = uv_temp.ToArray();
+        normals = normals_temp.ToArray(); // Add this line
+
+        // Clear and destroy temporary lists
+        triangles_temp.Clear();
+        uv_temp.Clear();
+        vertices_temp.Clear();
+        normals_temp.Clear();
+
+        triangles_temp = null;
+        uv_temp = null;
+        vertices_temp = null;
+        normals_temp = null;
+    }
+
+    public void SetVerticesFromTyles()
     {
         for (int z = 0, i = 0; z < cg.tylesPerChunkZ; z++)
         {
             for (int x = 0; x < cg.tylesPerChunkX; x++, i += 4)
             {
                 Tyle t = tgt.tyles[x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ];
-                AddTopQuad(i, t.GetVertices());
+                AddTopQuad(t.GetVertices());
             }
         }
     }
 
-    void AddTopQuad(int verticesStartIndex, Vector3[] verticesFromTyle)
+    void AddTopQuad(Vector3[] verticesFromTyle)
     {
         Vector3 chunkOffset = new Vector3(chunkCoordX * cg.tylesPerChunkX * tgt.widthPerPixel, 0, chunkCoordZ * cg.tylesPerChunkZ * tgt.widthPerPixel);
 
-        for (int i = 0; i < verticesFromTyle.Length; i++)
-        {
+        int startIndex = vertices_temp.Count;
 
-            vertices[verticesStartIndex + i] = verticesFromTyle[i] - chunkOffset;
-            //uv[verticesStartIndex + i] = new Vector2( verticesFromTyle[i].x, verticesFromTyle[i].z);
+        // Add vertices with offset
+        foreach (var vertex in verticesFromTyle)
+        {
+            vertices_temp.Add(vertex - chunkOffset);
         }
 
-        int tSI = verticesStartIndex / 4 * 6;
-        triangles[tSI] = verticesStartIndex;
-        triangles[tSI + 1] = verticesStartIndex + 3;
-        triangles[tSI + 2] = verticesStartIndex + 2;
-        triangles[tSI + 3] = verticesStartIndex;
-        triangles[tSI + 4] = verticesStartIndex + 2;
-        triangles[tSI + 5] = verticesStartIndex + 1;
+        // Add triangles
+        triangles_temp.Add(startIndex);
+        triangles_temp.Add(startIndex + 3);
+        triangles_temp.Add(startIndex + 2);
+        triangles_temp.Add(startIndex);
+        triangles_temp.Add(startIndex + 2);
+        triangles_temp.Add(startIndex + 1);
 
-        Vector2[] uvPerQuad = new Vector2[4];
+        // Calculate normal (assuming quad is planar)
+        Vector3 edge1 = verticesFromTyle[1] - verticesFromTyle[0];
+        Vector3 edge2 = verticesFromTyle[2] - verticesFromTyle[0];
+        Vector3 normal = Vector3.Cross(edge1, edge2).normalized;
 
-        uvPerQuad[0] = new Vector2(0, 0);
-        uvPerQuad[1] = new Vector2(1, 0);
-        uvPerQuad[2] = new Vector2(1, 1);
-        uvPerQuad[3] = new Vector2(0, 1);
-
-        for (int i = 0; i < uvPerQuad.Length; i++)
+        // Add normals (one per vertex, all the same for a flat quad)
+        for (int i = 0; i < 4; i++)
         {
-            uv[verticesStartIndex + i] = uvPerQuad[i];
+            normals_temp.Add(normal);
         }
 
-
+        // Add UV coordinates
+        uv_temp.Add(new Vector2(0, 0));
+        uv_temp.Add(new Vector2(1, 0));
+        uv_temp.Add(new Vector2(1, 1));
+        uv_temp.Add(new Vector2(0, 1));
     }
 
-    public void CreateSidemeshFromTyles()
+
+    public void SetSideVerticesFromTyles()
     {
-        Debug.Log($"ChunkCountHelper ChunkCountHelper ChunkCountHelper ChunkCountHelper ChunkCountHelper ChunkCountHelper: {chunkCountHelper ++}");
-        Debug.Log("SideMeshCreation");
+
         if (sideMesh == null) CreateSideMeshObject();
 
         sideVertices = new List<Vector3>();
@@ -99,7 +153,7 @@ public class TChunk : MonoBehaviour
 
         for (int z = 0, i = 0; z < cg.tylesPerChunkZ; z++)
         {
-            
+
             for (int x = 0; x < cg.tylesPerChunkX; x++, i += 4)
             {
                 Tyle t = tgt.tyles[x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ];
@@ -110,8 +164,6 @@ public class TChunk : MonoBehaviour
                     {
                         if (IsDirectionStepped(t, ti))
                         {
-                            Debug.Log($"QuadCountHelper: {quadCountHelper++}");
-                            Debug.Log($"sideMesh add Quad, {z}, {i}, {x}, {ti}");
                             AddSideQuad(t, t.neighbours[ti], ti);
                         }
                     }
@@ -223,21 +275,22 @@ public class TChunk : MonoBehaviour
         sideUv.AddRange(uv);
     }
 
-    public void ReGenerateMesh()
+    public void GenerateMesh()
     {
         Mesh mesh = new Mesh();
         mesh.name = $"chunkmesh {chunkCoordX}/{chunkCoordZ}";
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uv;
-        // mesh.RecalculateNormals();
-        RecalculateNormalsSeamless(mesh);
+        mesh.normals = normals;
+        mesh.RecalculateNormals();
+        // RecalculateNormalsSeamless(mesh);
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
-    public void ReGenerateSidemesh()
+    public void GenerateSidemesh()
     {
         Mesh mesh = new Mesh();
 

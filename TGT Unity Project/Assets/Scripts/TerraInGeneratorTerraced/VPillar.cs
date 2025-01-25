@@ -7,35 +7,95 @@ public class VPillar : MonoBehaviour
 {
 
     public Tyle[] tyles;
+    System.Random r;
 
     public float[] vertexHeights;
 
-    public void InstantiatePillar()
+    public void InstantiatePillar(System.Random _r)
     {
+        r = _r;
         tyles = new Tyle[4];
 
     }
-    public void SetVertexHeightsFromTyles()
+    public void SetVertexHeightsFromTyles(float maxRandomValue)
     {
         vertexHeights = new float[4];
 
         for (int i = 0; i < tyles.Length; i++)
         {
-            if(tyles[i] != null)
+            if (tyles[i] != null)
             {
                 vertexHeights[i] = tyles[i].height;
+                //  Debug.Log($"setting vertexheight on {gameObject.name}  to {vertexHeights[i]} from tyle {i}");
             }
-            
+            else
+            {
+                vertexHeights[i] = float.MaxValue;
+            }
         }
+
+        float average = AverageWithoutMax(vertexHeights);
+
+        for (int i = 0; i < vertexHeights.Length; i++)
+        {
+            if (vertexHeights[i] == float.MaxValue)
+            {
+                vertexHeights[i] = average;
+            }
+        }
+
+        RandomizeFloatArray(vertexHeights,maxRandomValue);
     }
 
+    public float AverageWithoutMax(float[] a)
+    {
+        if (a == null || a.Length == 0)
+        {
+            throw new ArgumentException("Array cannot be null or empty");
+        }
+
+        float sum = 0;
+        int count = 0;
+
+        foreach (float value in a)
+        {
+            if (value != float.MaxValue)
+            {
+                sum += value;
+                count++;
+            }
+        }
+
+        if (count == 0)
+        {
+            throw new InvalidOperationException("No valid values to calculate average");
+        }
+
+        return sum / count;
+    }
+    public void RandomizeFloatArray(float[] array, float randomness)
+    {
+        if (array == null || array.Length == 0)
+        {
+            throw new ArgumentException("Array cannot be null or empty");
+        }
+
+        
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            float randomValue = (float)(r.NextDouble() * 2 - 1) * randomness; // Generates a value between -randomness and +randomness
+            // Debug.Log($"setting vertexheight on {gameObject.name} from {array[i]} to plus {randomValue}, equals: {array[i] += randomValue}");
+            array[i] += randomValue;
+        }
+    }
     public void ContractVerticeHeights(float maxHeigtDifference)
     {
         List<int> v0List = new List<int>();
 
         for (int i = 1; i < vertexHeights.Length; i++)
         {
-            if( Mathf.Abs(vertexHeights[0] - vertexHeights[i]) < maxHeigtDifference)
+            if (Mathf.Abs(vertexHeights[0] - vertexHeights[i]) < maxHeigtDifference)
             {
                 v0List.Add(i);
             }
@@ -49,14 +109,14 @@ public class VPillar : MonoBehaviour
                 mergedHeight += vertexHeights[v0List[i]];
             }
 
-            vertexHeights[0] = mergedHeight / (float) (1 + v0List.Count);
+            vertexHeights[0] = mergedHeight / (float)(1 + v0List.Count);
 
             for (int i = 0; i < v0List.Count; i++)
             {
                 vertexHeights[v0List[i]] = vertexHeights[0];
             }
         }
-        
+
         //-----------------------------------------
         //-----------------------------------------
         //-----------------------------------------
@@ -65,7 +125,7 @@ public class VPillar : MonoBehaviour
 
         for (int i = 2; i < vertexHeights.Length; i++)
         {
-            if(Math.Abs(vertexHeights[1] - vertexHeights[i]) < maxHeigtDifference)
+            if (Math.Abs(vertexHeights[1] - vertexHeights[i]) < maxHeigtDifference)
             {
                 v1List.Add(i);
             }
@@ -78,19 +138,19 @@ public class VPillar : MonoBehaviour
                 mergedHeight += vertexHeights[v1List[i]];
             }
 
-            vertexHeights[1] = mergedHeight / (float) (1 + v1List.Count);
+            vertexHeights[1] = mergedHeight / (float)(1 + v1List.Count);
 
             for (int i = 0; i < v1List.Count; i++)
             {
                 vertexHeights[v1List[i]] = vertexHeights[1];
             }
         }
-        
+
         //-----------------------------------------
         //-----------------------------------------
         //-----------------------------------------
 
-        if (Mathf.Abs( vertexHeights[2] - vertexHeights[3]) < maxHeigtDifference)
+        if (Mathf.Abs(vertexHeights[2] - vertexHeights[3]) < maxHeigtDifference)
         {
             float mergedHeight = vertexHeights[2] + vertexHeights[3];
             vertexHeights[2] = mergedHeight / 2f;
@@ -107,7 +167,7 @@ public class VPillar : MonoBehaviour
             contractedHeight += vertexHeights[i];
         }
 
-        if(contractedHeight <= 1f)
+        if (contractedHeight <= 1f)
         {
             for (int i = 0; i < vertexHeights.Length; i++)
             {
@@ -116,5 +176,5 @@ public class VPillar : MonoBehaviour
         }
     }
 
-    
+
 }

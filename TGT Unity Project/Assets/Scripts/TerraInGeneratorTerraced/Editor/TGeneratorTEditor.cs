@@ -13,7 +13,11 @@ public class TGeneratorTEditor : Editor
         DrawDefaultInspector();
 
         // Add a slider for maxSlopeHeight
-        generator.maxSlopeHeight = EditorGUILayout.Slider("Max Slope Height", generator.maxSlopeHeight, 0f, 10f);
+        generator.maxSlopeHeight = EditorGUILayout.Slider("Max Slope Height", generator.maxSlopeHeight, 0f, 20f);
+
+        generator.maxRandomValue = EditorGUILayout.Slider("Randomize", generator.maxRandomValue, 0f, 10f);
+
+        generator.heightMultiplier = EditorGUILayout.Slider("height Multiplier", generator.heightMultiplier,0f, 100f);
 
         // Regenerate terrain whenever the slider value changes
         if (GUI.changed)
