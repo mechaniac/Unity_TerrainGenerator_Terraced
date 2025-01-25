@@ -19,6 +19,10 @@ public class TGeneratorTEditor : Editor
 
         generator.heightMultiplier = EditorGUILayout.Slider("height Multiplier", generator.heightMultiplier,0f, 100f);
 
+        generator.sineAmplitude = EditorGUILayout.Slider("sine Amplitude", generator.sineAmplitude,-10f,10f);
+
+        generator.sineFrequency = EditorGUILayout.Slider("sine Frequency", generator.sineFrequency,0,1f);
+
         // Regenerate terrain whenever the slider value changes
         if (GUI.changed)
         {

@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class VPillar : MonoBehaviour
 {
+    //STORES HEIGHTS from TYLES. 
+    // CONTRACTs    
+    // randomizes
+    // averages
+    // sets bleeding borderValues 
 
     public Tyle[] tyles;
     System.Random r;
 
     public float[] vertexHeights;
+    public float average;
 
     public void InstantiatePillar(System.Random _r)
     {
@@ -34,7 +40,8 @@ public class VPillar : MonoBehaviour
             }
         }
 
-        float average = AverageWithoutMax(vertexHeights);
+        average = AverageWithoutMax(vertexHeights);
+        transform.position = new Vector3(transform.position.x, average, transform.position.z);
 
         for (int i = 0; i < vertexHeights.Length; i++)
         {

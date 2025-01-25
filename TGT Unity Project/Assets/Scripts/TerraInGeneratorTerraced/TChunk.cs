@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,12 +14,14 @@ public class TChunk : MonoBehaviour
     int quadCountHelper;
     int chunkCountHelper;
 
+    Vector3 chunkOffset;
 
     //TEMP Variables
 
+    List<Vector3> vertices_temp;
     List<int> triangles_temp;
     List<Vector2> uv_temp;
-    List<Vector3> vertices_temp;
+
     List<Vector3> normals_temp;
 
     // ------------
@@ -55,14 +58,45 @@ public class TChunk : MonoBehaviour
     public void GenerateMeshes()
     {
         InitializeTempLists();
-        SetVerticesFromTyles();
-        FinalizeListsToArrays();
-        GenerateMesh();
 
+        SetVerticesFromTyles();
+
+        // SetVerticesFromPillars();
+
+        DistortVerticesSine(tgt.sineAmplitude, tgt.sineFrequency, 1);
+
+        FinalizeListsToArrays();
+
+        GenerateMesh();
+        ChunkLog();
         SetSideVerticesFromTyles();
         GenerateSidemesh();
     }
 
+    void ChunkLog()
+    {
+        Debug.Log($"Generated Vertices {vertices.Length}");
+
+        Debug.Log($"Generated Triangles {triangles.Length}");
+
+        Debug.Log($"Generated UVs: {uv.Length}");
+    }
+
+
+    public void DistortVerticesSine(float amplitude, float frequency, float phase)
+    {
+        if (vertices_temp == null || vertices_temp.Count == 0)
+        {
+            throw new InvalidOperationException("Vertices list is null or empty");
+        }
+
+        for (int i = 0; i < vertices_temp.Count; i++)
+        {
+            Vector3 vertex = vertices_temp[i];
+            float sineOffset = Mathf.Sin(frequency * (vertex.x + vertex.z) + phase) * amplitude;
+            vertices_temp[i] = new Vector3(vertex.x, vertex.y + sineOffset, vertex.z);
+        }
+    }
 
     public void InitializeTempLists()
     {
@@ -70,6 +104,8 @@ public class TChunk : MonoBehaviour
         uv_temp = new List<Vector2>();
         vertices_temp = new List<Vector3>();
         normals_temp = new List<Vector3>();
+
+        chunkOffset = new Vector3(chunkCoordX * cg.tylesPerChunkX * tgt.widthPerPixel, 0, chunkCoordZ * cg.tylesPerChunkZ * tgt.widthPerPixel);
     }
 
     public void FinalizeListsToArrays()
@@ -97,15 +133,39 @@ public class TChunk : MonoBehaviour
         {
             for (int x = 0; x < cg.tylesPerChunkX; x++, i += 4)
             {
-                Tyle t = tgt.tyles[x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ];
-                AddTopQuad(t.GetVertices());
+                int tyleIndex = x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ;
+
+                if (tgt.tyles[tyleIndex] != null)
+                {
+                    Tyle t = tgt.tyles[tyleIndex];
+                    AddTopQuad(t.GetVertices());
+                }
+
+            }
+        }
+    }
+
+    public void SetVerticesFromPillars()
+    {
+        for (int z = 0, i = 0; z <= cg.tylesPerChunkZ; z++)
+        {
+            for (int x = 0; x <= cg.tylesPerChunkX; x++)
+            {
+                int pillarIndex = x + z * (tgt.tylesX + 1) + chunkCoordX * (cg.tylesPerChunkX + 1) + chunkCoordZ * (tgt.tylesX + 1) * (cg.tylesPerChunkZ + 1);
+
+                if (tgt.vPillars[pillarIndex] != null)
+                {
+                    VPillar p = tgt.vPillars[pillarIndex];
+                    
+                    vertices_temp.Add(p.transform.position);
+                }
             }
         }
     }
 
     void AddTopQuad(Vector3[] verticesFromTyle)
     {
-        Vector3 chunkOffset = new Vector3(chunkCoordX * cg.tylesPerChunkX * tgt.widthPerPixel, 0, chunkCoordZ * cg.tylesPerChunkZ * tgt.widthPerPixel);
+
 
         int startIndex = vertices_temp.Count;
 

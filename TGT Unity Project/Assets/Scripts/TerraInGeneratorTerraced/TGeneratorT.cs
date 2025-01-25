@@ -25,7 +25,7 @@ public class TGeneratorT : MonoBehaviour
 
     [HideInInspector]
     public Tyle[] tyles;
-    VPillar[] vPillars;
+    public VPillar[] vPillars;
 
     [HideInInspector]
     public int tylesX;
@@ -35,6 +35,9 @@ public class TGeneratorT : MonoBehaviour
     public float maxSlopeHeight = .35f;
     public float heightMultiplier;
     public float maxRandomValue = 0.0f;
+
+    public float sineAmplitude;
+    public float sineFrequency;
 
     private void Awake()
     {
@@ -90,7 +93,7 @@ public class TGeneratorT : MonoBehaviour
 
         string assetPath = AssetDatabase.GetAssetPath(heightMap);
         mapName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
-        Debug.Log("File Name: " + mapName);
+        // Debug.Log("File Name: " + mapName);
 
         cg = GetComponent<ChunkGenerator>();
     }

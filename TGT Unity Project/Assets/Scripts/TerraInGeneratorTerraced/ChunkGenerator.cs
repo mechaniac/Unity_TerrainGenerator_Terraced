@@ -23,7 +23,7 @@ public class ChunkGenerator : MonoBehaviour
 
     private void Awake()
     {
-        InitializeChunkHolder();
+        // InitializeChunkHolder();
     }
 
     void InitializeChunkHolder()
@@ -40,6 +40,7 @@ public class ChunkGenerator : MonoBehaviour
 
         chunkCountX = (int)cCX;
         chunkCountZ = (int)cCZ;
+        Debug.Log($"chunkCountX {chunkCountX}, chunkCountZ: {chunkCountZ}");
 
         if (cCX != chunkCountX || cCZ != chunkCountZ)
         {
@@ -50,6 +51,7 @@ public class ChunkGenerator : MonoBehaviour
 
     public void GenerateChunkMeshes() //called from MAIN stack
     {
+        InitializeChunkHolder();
         GameObject holderObject = new GameObject("chunkHolder");
 
         // Get the Transform component
@@ -78,6 +80,7 @@ public class ChunkGenerator : MonoBehaviour
         {
             for (int x = 0; x < chunkCountX; x++, i++)
             {
+                Debug.Log($"chunk created: {i} at {x}, {z}");
                 TChunk c = chunks[i] = Instantiate(chunkPrefab);
                 c.name = tgt.mapName + "_chunk_" + x + ", " + z;
                 c.gameObject.SetActive(true);
