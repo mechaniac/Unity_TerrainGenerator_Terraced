@@ -17,6 +17,12 @@ public class ChunkGenerator : MonoBehaviour
     public int tylesPerChunkZ = 8;
 
     [HideInInspector]
+    public int vertPerChunkX;
+
+    [HideInInspector]
+    public int verPerChunkZ;
+
+    [HideInInspector]
     public int chunkCountX;
     [HideInInspector]
     public int chunkCountZ;
@@ -26,24 +32,28 @@ public class ChunkGenerator : MonoBehaviour
         // InitializeChunkHolder();
     }
 
-    void InitializeChunkHolder()
+    void InitializeChunkGenerator()
     {
         tgt = GetComponent<TGeneratorT>();
 
         if (tgt.heightMap.width % 2 != 0)
         {
-            Debug.LogWarning($"heightMap width ({tgt.heightMap.width}) is not even. ChunkCreation will fail");
+            Debug.LogWarning($"heightMap width ({tgt.heightMap.width}) is not even. ChunkCreation might fail");
         }
 
         float cCX = tgt.heightMap.width / (float)tylesPerChunkX;
         float cCZ = tgt.heightMap.height / (float)tylesPerChunkZ;
 
+        verPerChunkZ = tylesPerChunkZ + 1;
+        vertPerChunkX = tylesPerChunkX + 1;
+
         chunkCountX = (int)cCX;
         chunkCountZ = (int)cCZ;
-        Debug.Log($"chunkCountX {chunkCountX}, chunkCountZ: {chunkCountZ}");
+        // Debug.Log($"chunk Count X: {chunkCountX}, chunk Count Z: {chunkCountZ}");
 
         if (cCX != chunkCountX || cCZ != chunkCountZ)
         {
+            Debug.Log($"cCX: {cCX}, cCZ: {cCZ}, chunkCountX: {chunkCountX}, chunkCounZ: {chunkCountZ}");
             Debug.LogWarning($"heightMap not evenly divisible by Tyles Per Chunk");
         }
 
@@ -51,7 +61,9 @@ public class ChunkGenerator : MonoBehaviour
 
     public void GenerateChunkMeshes() //called from MAIN stack
     {
-        InitializeChunkHolder();
+        InitializeChunkGenerator();
+
+
         GameObject holderObject = new GameObject("chunkHolder");
 
         // Get the Transform component
@@ -80,17 +92,17 @@ public class ChunkGenerator : MonoBehaviour
         {
             for (int x = 0; x < chunkCountX; x++, i++)
             {
-                Debug.Log($"chunk created: {i} at {x}, {z}");
+                Debug.Log($"NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW chunk created: {i} at {x}, {z}");
                 TChunk c = chunks[i] = Instantiate(chunkPrefab);
-                c.name = tgt.mapName + "_chunk_" + x + ", " + z;
+                c.name = tgt.mapName + "_chunk_" + i + "_" + x + "_" + z;
                 c.gameObject.SetActive(true);
-                c.transform.position = new Vector3(x * tylesPerChunkX * tgt.widthPerPixel + chunkOffsetX, 0, z * tylesPerChunkZ * tgt.widthPerPixel + chunkOffsetZ);
+                // c.transform.position = new Vector3(x * tylesPerChunkX * tgt.widthPerPixel + chunkOffsetX, 0, z * tylesPerChunkZ * tgt.widthPerPixel + chunkOffsetZ);
                 if (chunkHolder != null)
                 {
                     c.transform.SetParent(chunkHolder);
                 }
                 c.InitializeChunk(x, z, i, tgt, this);
-                
+
                 c.GenerateMeshes();
             }
         }
