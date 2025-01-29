@@ -66,7 +66,7 @@ public class TChunk : MonoBehaviour
 
 
 
-        DistortVerticesSine(tgt.sineAmplitude, tgt.sineFrequency, 1);
+        DistortVerticesSine(tgt.sineAmplitude, tgt.sineFrequency, tgt.sinePhase);
 
 
         FinalizeListsToArrays();

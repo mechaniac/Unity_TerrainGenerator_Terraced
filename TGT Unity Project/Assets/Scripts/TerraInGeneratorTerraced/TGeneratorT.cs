@@ -38,6 +38,7 @@ public class TGeneratorT : MonoBehaviour
 
     public float sineAmplitude;
     public float sineFrequency;
+    public float sinePhase;
 
     private void Awake()
     {

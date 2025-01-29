@@ -23,6 +23,8 @@ public class TGeneratorTEditor : Editor
 
         generator.sineFrequency = EditorGUILayout.Slider("sine Frequency", generator.sineFrequency,0,1f);
 
+        generator.sinePhase = EditorGUILayout.Slider("sine phase", generator.sinePhase, -2f,2f);
+
         // Regenerate terrain whenever the slider value changes
         if (GUI.changed)
         {
