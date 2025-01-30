@@ -36,11 +36,17 @@ public class Tyle : MonoBehaviour
         return v;
     }
 
-    public Vector3 GetVertex(int i)
+    public Vector3 GetVertexFromCornerPillar(int i)
     {
         Vector3 v = new Vector3(vPillars[i].transform.position.x, vPillars[i].vertexHeights[i], vPillars[i].transform.position.z);
 
         return v;
+    }
+
+    public int GetVertexIndexFromCornerPillar(int i){
+        int vertexIndex = vPillars[i].vertexIndices[i];
+
+        return vertexIndex;
     }
 
     public void InstantiateTyle(int x, int z, int i)
@@ -72,5 +78,24 @@ public class Tyle : MonoBehaviour
             neighbours[3] = tyles[index - tylesX];
         }
     }
+
+    public int[] GetTopQuadVertices(){
+        int[] t = new int[6];
+
+        Debug.Log($" pillar indices lenght: {vPillars[0].vertexIndices.Length}");
+        t[0] = vPillars[0].vertexIndices[0];
+        t[1]= vPillars[3].vertexIndices[3];
+        t[2] = vPillars[2].vertexIndices[2];
+
+        t[3] = t[2];
+        t[4] = vPillars[1].vertexIndices[1];
+        t[5] = t[0];
+
+        return t;
+    }
+
+
+
+
 
 }

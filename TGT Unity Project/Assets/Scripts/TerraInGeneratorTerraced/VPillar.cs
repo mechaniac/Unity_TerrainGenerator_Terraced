@@ -15,15 +15,17 @@ public class VPillar : MonoBehaviour
     System.Random r;
 
     public float[] vertexHeights;
+
+    public int[] vertexIndices;
     public float average;
 
-    
+
 
     public void InstantiatePillar(System.Random _r)
     {
         r = _r;
         tyles = new Tyle[4];
-    
+
 
     }
     public void SetVertexHeightsFromTyles(float maxRandomValue)
@@ -58,7 +60,7 @@ public class VPillar : MonoBehaviour
         {
             RandomizeFloatArray(vertexHeights, maxRandomValue);
         }
-        
+
 
     }
 
@@ -105,40 +107,65 @@ public class VPillar : MonoBehaviour
         }
     }
     public void ContractVerticeHeights(float maxHeightDifference)
-{
-    for (int i = 0; i < vertexHeights.Length; i++)
     {
-        List<int> closeVertices = new List<int>();
-
-        for (int j = i + 1; j < vertexHeights.Length; j++)
+        for (int i = 0; i < vertexHeights.Length; i++)
         {
-            if (Mathf.Abs(vertexHeights[i] - vertexHeights[j]) < maxHeightDifference)
-            {
-                closeVertices.Add(j);
-            }
-        }
+            List<int> closeVertices = new List<int>();
 
-        if (closeVertices.Count > 0)
-        {
-            float mergedHeight = vertexHeights[i];
-
-            foreach (int index in closeVertices)
+            for (int j = i + 1; j < vertexHeights.Length; j++)
             {
-                mergedHeight += vertexHeights[index];
+                if (Mathf.Abs(vertexHeights[i] - vertexHeights[j]) < maxHeightDifference)
+                {
+                    closeVertices.Add(j);
+                }
             }
 
-            mergedHeight /= (1 + closeVertices.Count);
-
-            vertexHeights[i] = mergedHeight;
-
-            foreach (int index in closeVertices)
+            if (closeVertices.Count > 0)
             {
-                vertexHeights[index] = mergedHeight;
+                float mergedHeight = vertexHeights[i];
+
+                foreach (int index in closeVertices)
+                {
+                    mergedHeight += vertexHeights[index];
+                }
+
+                mergedHeight /= (1 + closeVertices.Count);
+
+                vertexHeights[i] = mergedHeight;
+
+                foreach (int index in closeVertices)
+                {
+                    vertexHeights[index] = mergedHeight;
+                }
             }
         }
     }
-}
- 
+    public void PushVerticesFromPillar(List<Vector3> vertices, List<Vector2> uv, List<Vector3> normals)
+    {
+        Debug.Log($"pushing");
+        Dictionary<float, int> uniqueHeights = new Dictionary<float, int>();
+        vertexIndices = new int[vertexHeights.Length];
+
+        for (int i = 0; i < vertexHeights.Length; i++)
+        {
+            if (uniqueHeights.TryGetValue(vertexHeights[i], out int existingIndex))
+            {
+                vertexIndices[i] = existingIndex;
+            }
+            else
+            {
+                Vector3 v = new Vector3(transform.position.x, vertexHeights[i], transform.position.z);
+                vertices.Add(v);
+                int newIndex = vertices.Count - 1;
+                uniqueHeights[vertexHeights[i]] = newIndex;
+                vertexIndices[i] = newIndex;
+
+                uv.Add(new Vector2(transform.position.x, transform.position.z));
+                normals.Add(new Vector3(0, 0, 0));
+            }
+        }
+    }
+
 
     public void ContractVerticeHeightsBackup()
     {

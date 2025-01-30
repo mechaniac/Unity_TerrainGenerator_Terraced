@@ -19,8 +19,9 @@ public class ChunkGenerator : MonoBehaviour
     [HideInInspector]
     public int vertPerChunkX;
 
+    
     [HideInInspector]
-    public int verPerChunkZ;
+    public int vertPerChunkZ;
 
     [HideInInspector]
     public int chunkCountX;
@@ -44,8 +45,9 @@ public class ChunkGenerator : MonoBehaviour
         float cCX = tgt.heightMap.width / (float)tylesPerChunkX;
         float cCZ = tgt.heightMap.height / (float)tylesPerChunkZ;
 
-        verPerChunkZ = tylesPerChunkZ + 1;
-        vertPerChunkX = tylesPerChunkX + 1;
+        vertPerChunkX = tylesPerChunkX+1;
+        vertPerChunkZ = tylesPerChunkZ+1;
+
 
         chunkCountX = (int)cCX;
         chunkCountZ = (int)cCZ;
@@ -73,6 +75,7 @@ public class ChunkGenerator : MonoBehaviour
             chunkHolder.SetParent(tgt.gameObject.transform);
         }
         CreateChunks();
+        Debug.Log($"chunkCreation DONE: chunks Length {chunks.Length}");
     }
 
     void CreateChunks()
@@ -92,7 +95,7 @@ public class ChunkGenerator : MonoBehaviour
         {
             for (int x = 0; x < chunkCountX; x++, i++)
             {
-                Debug.Log($"NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW NEW chunk created: {i} at {x}, {z}");
+                Debug.Log($"NEW chunk created: {i} at {x}, {z}");
                 TChunk c = chunks[i] = Instantiate(chunkPrefab);
                 c.name = tgt.mapName + "_chunk_" + i + "_" + x + "_" + z;
                 c.gameObject.SetActive(true);

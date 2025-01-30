@@ -1,0 +1,2472 @@
+
+========== Terrain Generation Log ==========
+Timestamp: 29/01/2025 23:46:52
+Map Name: testMap_22_01
+---------------------------------------------
+
+DeleteTerrain took: 6 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 24 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 26 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 3 ms
+
+
+Total Time: 59 ms
+Longest Task: InstantiatePillars (26 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_22_01
+- HeightMap Size: 22x22
+- Width Per Pixel: 3
+- Number of Tyles: 22 x 22 (Total: 484)
+- Number of Pillars: 529
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 29/01/2025 23:47:28
+Map Name: testMap_22_01
+---------------------------------------------
+
+DeleteTerrain took: 3 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 4275 ms
+
+SetTileNeighbours took: 3 ms
+
+InstantiatePillars took: 4319 ms
+
+AssignTylesToPillars took: 6 ms
+
+SetPillarVerticesFromTyles took: 124 ms
+
+ContractAllVerticeHeights took: 89 ms
+
+GenerateChunkMeshes took: 208 ms
+
+
+Total Time: 9027 ms
+Longest Task: InstantiatePillars (4319 ms)
+
+Terrain Generation Details:
+- Map Name: bright_330_01
+- HeightMap Size: 330x330
+- Width Per Pixel: 3
+- Number of Tyles: 330 x 330 (Total: 108900)
+- Number of Pillars: 109561
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 29/01/2025 23:53:39
+Map Name: bright_330_01
+---------------------------------------------
+
+DeleteTerrain took: 709 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 43 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 40 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 1 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 7 ms
+
+
+Total Time: 800 ms
+Longest Task: DeleteTerrain (709 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_33_01
+- HeightMap Size: 33x33
+- Width Per Pixel: 3
+- Number of Tyles: 33 x 33 (Total: 1089)
+- Number of Pillars: 1156
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 00:53:52
+Map Name: testMap_33_01
+---------------------------------------------
+
+DeleteTerrain took: 21 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 6 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 5 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 1 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 2 ms
+
+
+Total Time: 35 ms
+Longest Task: DeleteTerrain (21 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 00:53:56
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 9 ms
+
+
+Total Time: 15 ms
+Longest Task: GenerateChunkMeshes (9 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 00:54:05
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 2 ms
+
+
+Total Time: 7 ms
+Longest Task: InstantiatePillars (3 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 13:08:36
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 13 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 72 ms
+
+
+Total Time: 87 ms
+Longest Task: GenerateChunkMeshes (72 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 13:08:38
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 11 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 60 ms
+
+
+Total Time: 73 ms
+Longest Task: GenerateChunkMeshes (60 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:23:53
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 7 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 14 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:25:31
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 9 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:27:18
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 7 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:32:55
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 9 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:33:42
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 6 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:33:49
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 13 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:34:31
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 7 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:35:40
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 7 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 89 ms
+
+
+Total Time: 99 ms
+Longest Task: GenerateChunkMeshes (89 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:35:54
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 13 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 70 ms
+
+
+Total Time: 85 ms
+Longest Task: GenerateChunkMeshes (70 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:35:56
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 5 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 71 ms
+
+
+Total Time: 78 ms
+Longest Task: GenerateChunkMeshes (71 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:35:56
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 73 ms
+
+
+Total Time: 79 ms
+Longest Task: GenerateChunkMeshes (73 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:23
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 9 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 87 ms
+
+
+Total Time: 99 ms
+Longest Task: GenerateChunkMeshes (87 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:23
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 89 ms
+
+
+Total Time: 95 ms
+Longest Task: GenerateChunkMeshes (89 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 89 ms
+
+
+Total Time: 95 ms
+Longest Task: GenerateChunkMeshes (89 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 91 ms
+
+
+Total Time: 97 ms
+Longest Task: GenerateChunkMeshes (91 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 86 ms
+
+
+Total Time: 92 ms
+Longest Task: GenerateChunkMeshes (86 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 87 ms
+
+
+Total Time: 92 ms
+Longest Task: GenerateChunkMeshes (87 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 103 ms
+
+
+Total Time: 108 ms
+Longest Task: GenerateChunkMeshes (103 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 108 ms
+
+
+Total Time: 114 ms
+Longest Task: GenerateChunkMeshes (108 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:24
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 121 ms
+
+
+Total Time: 127 ms
+Longest Task: GenerateChunkMeshes (121 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:25
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 104 ms
+
+
+Total Time: 109 ms
+Longest Task: GenerateChunkMeshes (104 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:25
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 182 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 5 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 91 ms
+
+
+Total Time: 278 ms
+Longest Task: InstantiateTyles (182 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:25
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 88 ms
+
+
+Total Time: 94 ms
+Longest Task: GenerateChunkMeshes (88 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:25
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 84 ms
+
+
+Total Time: 90 ms
+Longest Task: GenerateChunkMeshes (84 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:25
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 87 ms
+
+
+Total Time: 93 ms
+Longest Task: GenerateChunkMeshes (87 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 84 ms
+
+
+Total Time: 89 ms
+Longest Task: GenerateChunkMeshes (84 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 96 ms
+
+
+Total Time: 101 ms
+Longest Task: GenerateChunkMeshes (96 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 90 ms
+
+
+Total Time: 95 ms
+Longest Task: GenerateChunkMeshes (90 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 84 ms
+
+
+Total Time: 89 ms
+Longest Task: GenerateChunkMeshes (84 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 85 ms
+
+
+Total Time: 90 ms
+Longest Task: GenerateChunkMeshes (85 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 94 ms
+
+
+Total Time: 99 ms
+Longest Task: GenerateChunkMeshes (94 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 5 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 87 ms
+
+
+Total Time: 94 ms
+Longest Task: GenerateChunkMeshes (87 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:26
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 85 ms
+
+
+Total Time: 90 ms
+Longest Task: GenerateChunkMeshes (85 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 85 ms
+
+
+Total Time: 90 ms
+Longest Task: GenerateChunkMeshes (85 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 98 ms
+
+
+Total Time: 104 ms
+Longest Task: GenerateChunkMeshes (98 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 85 ms
+
+
+Total Time: 90 ms
+Longest Task: GenerateChunkMeshes (85 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 85 ms
+
+
+Total Time: 90 ms
+Longest Task: GenerateChunkMeshes (85 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 93 ms
+
+
+Total Time: 98 ms
+Longest Task: GenerateChunkMeshes (93 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 90 ms
+
+
+Total Time: 95 ms
+Longest Task: GenerateChunkMeshes (90 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:27
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 90 ms
+
+
+Total Time: 95 ms
+Longest Task: GenerateChunkMeshes (90 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:28
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 91 ms
+
+
+Total Time: 96 ms
+Longest Task: GenerateChunkMeshes (91 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:28
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 4 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 96 ms
+
+
+Total Time: 102 ms
+Longest Task: GenerateChunkMeshes (96 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:28
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 93 ms
+
+
+Total Time: 98 ms
+Longest Task: GenerateChunkMeshes (93 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:28
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 2 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 90 ms
+
+
+Total Time: 94 ms
+Longest Task: GenerateChunkMeshes (90 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:28
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 96 ms
+
+
+Total Time: 101 ms
+Longest Task: GenerateChunkMeshes (96 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:28
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 2 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 92 ms
+
+
+Total Time: 96 ms
+Longest Task: GenerateChunkMeshes (92 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:29
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 99 ms
+
+
+Total Time: 105 ms
+Longest Task: GenerateChunkMeshes (99 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:29
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 3 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 90 ms
+
+
+Total Time: 96 ms
+Longest Task: GenerateChunkMeshes (90 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:29
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 91 ms
+
+
+Total Time: 96 ms
+Longest Task: GenerateChunkMeshes (91 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:29
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 96 ms
+
+
+Total Time: 101 ms
+Longest Task: GenerateChunkMeshes (96 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:29
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 95 ms
+
+
+Total Time: 100 ms
+Longest Task: GenerateChunkMeshes (95 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:29
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 93 ms
+
+
+Total Time: 98 ms
+Longest Task: GenerateChunkMeshes (93 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 101 ms
+
+
+Total Time: 106 ms
+Longest Task: GenerateChunkMeshes (101 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 99 ms
+
+
+Total Time: 104 ms
+Longest Task: GenerateChunkMeshes (99 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 2 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 89 ms
+
+
+Total Time: 93 ms
+Longest Task: GenerateChunkMeshes (89 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 92 ms
+
+
+Total Time: 97 ms
+Longest Task: GenerateChunkMeshes (92 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 104 ms
+
+
+Total Time: 109 ms
+Longest Task: GenerateChunkMeshes (104 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 95 ms
+
+
+Total Time: 100 ms
+Longest Task: GenerateChunkMeshes (95 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:30
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 101 ms
+
+
+Total Time: 106 ms
+Longest Task: GenerateChunkMeshes (101 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+
+
+========== Terrain Generation Log ==========
+Timestamp: 30/01/2025 14:36:31
+Map Name: testMap_8_01
+---------------------------------------------
+
+DeleteTerrain took: 0 ms
+
+InitializeMap took: 0 ms
+
+InstantiateTyles took: 2 ms
+
+SetTileNeighbours took: 0 ms
+
+InstantiatePillars took: 3 ms
+
+AssignTylesToPillars took: 0 ms
+
+SetPillarVerticesFromTyles took: 0 ms
+
+ContractAllVerticeHeights took: 0 ms
+
+GenerateChunkMeshes took: 99 ms
+
+
+Total Time: 104 ms
+Longest Task: GenerateChunkMeshes (99 ms)
+
+Terrain Generation Details:
+- Map Name: testMap_8_01
+- HeightMap Size: 8x8
+- Width Per Pixel: 3
+- Number of Tyles: 8 x 8 (Total: 64)
+- Number of Pillars: 81
+- Set Map to Scene Center: False
+- Top Mesh Material: topmeshMat
+- Side Mesh Material: sidemeshMat
+

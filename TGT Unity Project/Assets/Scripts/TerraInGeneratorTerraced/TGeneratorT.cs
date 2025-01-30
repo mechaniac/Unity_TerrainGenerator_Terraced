@@ -2,10 +2,24 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.IO;
+using System;
+
 
 
 public class TGeneratorT : MonoBehaviour
 {
+
+    private string logFilePath = "TerrainGenerationLog.txt";
+
+    private void WriteLog(string message)
+    {
+        if (enableLogging)
+        {
+            File.AppendAllText(logFilePath, message + "\n");
+        }
+    }
+
     ChunkGenerator cg;
 
     public System.Random random;
@@ -16,6 +30,8 @@ public class TGeneratorT : MonoBehaviour
     public Material sideMeshMat;
     public string mapName;
     public int widthPerPixel;
+
+    public bool enableLogging = true; // Toggle logging on/off
 
 
     public bool setMapToSceneCenter;
@@ -67,7 +83,7 @@ public class TGeneratorT : MonoBehaviour
             }
         }
     }
-    public void GenerateTerrain() //MAIN Stack
+    public void GenerateTerrainUnLogged() //MAIN Stack
     {
         random = new System.Random(123);
         DeleteTerrain();
@@ -83,7 +99,72 @@ public class TGeneratorT : MonoBehaviour
         SetPillarVerticesFromTyles(maxRandomValue);
         ContractAllVerticeHeights(maxSlopeHeight);
         cg.GenerateChunkMeshes();
+
+        LogTerrainGenerationDetails();
     }
+
+    public void GenerateTerrain() //MAIN Stack
+    {
+        random = new System.Random(123);
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        long totalTime = 0;
+        string longestTask = "";
+        long longestTime = 0;
+
+        string header = "\n========== Terrain Generation Log ==========" +
+                        "\nTimestamp: " + DateTime.Now +
+                        "\nMap Name: " + mapName +
+                        "\n---------------------------------------------\n";
+        WriteLog(header);
+        if (enableLogging) Debug.Log(header);
+
+        void LogTask(string taskName)
+        {
+            long elapsed = stopwatch.ElapsedMilliseconds;
+            totalTime += elapsed;
+            if (elapsed > longestTime)
+            {
+                longestTime = elapsed;
+                longestTask = taskName;
+            }
+            if (enableLogging) Debug.Log(taskName + " took: " + elapsed + " ms");
+            WriteLog(taskName + " took: " + elapsed + " ms\n");
+        }
+
+        stopwatch.Start(); DeleteTerrain(); stopwatch.Stop(); LogTask("DeleteTerrain");
+        stopwatch.Restart(); InitializeMap(); stopwatch.Stop(); LogTask("InitializeMap");
+        stopwatch.Restart(); InstantiateTyles(); stopwatch.Stop(); LogTask("InstantiateTyles");
+        stopwatch.Restart(); SetTileNeighbours(); stopwatch.Stop(); LogTask("SetTileNeighbours");
+        stopwatch.Restart(); InstantiatePillars(); stopwatch.Stop(); LogTask("InstantiatePillars");
+        stopwatch.Restart(); AssignTylesToPillars(); stopwatch.Stop(); LogTask("AssignTylesToPillars");
+        stopwatch.Restart(); SetPillarVerticesFromTyles(maxRandomValue); stopwatch.Stop(); LogTask("SetPillarVerticesFromTyles");
+        stopwatch.Restart(); ContractAllVerticeHeights(maxSlopeHeight); stopwatch.Stop(); LogTask("ContractAllVerticeHeights");
+        stopwatch.Restart(); cg.GenerateChunkMeshes(); stopwatch.Stop(); LogTask("GenerateChunkMeshes");
+
+        string summary = "\nTotal Time: " + totalTime + " ms" +
+                         "\nLongest Task: " + longestTask + " (" + longestTime + " ms)\n";
+        if (enableLogging) Debug.Log(summary);
+        WriteLog(summary);
+
+        LogTerrainGenerationDetails();
+    }
+
+    public void LogTerrainGenerationDetails()
+    {
+        string logMessage = "Terrain Generation Details:\n" +
+                            "- Map Name: " + mapName + "\n" +
+                            "- HeightMap Size: " + (heightMap != null ? heightMap.width + "x" + heightMap.height : "No HeightMap Provided") + "\n" +
+                            "- Width Per Pixel: " + widthPerPixel + "\n" +
+                            "- Number of Tyles: " + tylesX + " x " + tylesZ + " (Total: " + (tylesX * tylesZ) + ")\n" +
+                            "- Number of Pillars: " + (vPillars != null ? vPillars.Length : 0) + "\n" +
+                            "- Set Map to Scene Center: " + setMapToSceneCenter + "\n" +
+                            "- Top Mesh Material: " + (topMeshMat != null ? topMeshMat.name : "None") + "\n" +
+                            "- Side Mesh Material: " + (sideMeshMat != null ? sideMeshMat.name : "None");
+
+        if (enableLogging) Debug.Log(logMessage);
+        WriteLog(logMessage + "\n");
+    }
+
 
     void InitializeMap()
     {
@@ -114,7 +195,7 @@ public class TGeneratorT : MonoBehaviour
                 t.transform.position = new Vector3(x * widthPerPixel + widthPerPixel / 2f, 0, z * widthPerPixel + widthPerPixel / 2f);
                 t.gameObject.SetActive(true);
                 t.transform.SetParent(tylesHolder.transform, true);
-                t.InstantiateTyle(x,z,i);
+                t.InstantiateTyle(x, z, i);
                 t.height = heightMap.GetPixel(x, z).grayscale * heightMultiplier;
                 t.name = $"Tile_{i}_{x}_{z}";
             }

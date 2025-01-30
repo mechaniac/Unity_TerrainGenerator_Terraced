@@ -23,6 +23,8 @@ public class TChunk : MonoBehaviour
     List<int> triangles_temp;
     List<Vector2> uv_temp;
 
+    List<Vector3> vertices_temp_02;
+
     List<Vector3> normals_temp;
 
     // ------------
@@ -64,21 +66,25 @@ public class TChunk : MonoBehaviour
 
         SetMeshesFromTyles();
 
-
-
         DistortVerticesSine(tgt.sineAmplitude, tgt.sineFrequency, tgt.sinePhase);
 
-
-        FinalizeListsToArrays();
-        // ChunkLog();
+        // LogChunk();
+        // LogAllTriangles();
 
         GenerateMesh();
         // ChunkLog();
         // SetSideVerticesFromTyles();
         // GenerateSidemesh();
+
+        LogMeshGen_02();
     }
 
-    void ChunkLog()
+    void LogMeshGen_02()
+    {
+        Debug.Log($"List vertices temp 2 Count {vertices_temp_02.Count}");
+    }
+
+    void LogChunk()
     {
         Debug.Log($"Chunk ------------------------------------------------------------------------------------------------------------- {chunkCoordX}, {chunkCoordZ}");
         Debug.Log($"Generated Vertices {vertices.Length}, temp: {vertices_temp.Count}");
@@ -86,7 +92,10 @@ public class TChunk : MonoBehaviour
         Debug.Log($"Generated Triangles {triangles.Length / 3}, temp: {triangles_temp.Count / 3}");
 
         Debug.Log($"Generated UVs: {uv.Length}, temp: {uv_temp.Count}");
+    }
 
+    void LogAllTriangles()
+    {
         for (int i = 0; i < triangles.Length; i++)
         {
             if (i % 6 == 0) { Debug.Log($"{i / 6} next quad"); }
@@ -118,69 +127,40 @@ public class TChunk : MonoBehaviour
         vertices_temp = new List<Vector3>();
         normals_temp = new List<Vector3>();
 
+        vertices_temp_02 = new List<Vector3>();
+
         chunkOffset = new Vector3(chunkCoordX * cg.tylesPerChunkX * tgt.widthPerPixel, 0, chunkCoordZ * cg.tylesPerChunkZ * tgt.widthPerPixel);
-    }
-
-    public void FinalizeListsToArrays()
-    {
-
-
-        vertices = vertices_temp.ToArray();
-        triangles = triangles_temp.ToArray();
-        uv = uv_temp.ToArray();
-        normals = normals_temp.ToArray(); // Add this line
-
-        // Clear and destroy temporary lists
-        // triangles_temp.Clear();
-        // uv_temp.Clear();
-        // vertices_temp.Clear();
-        // normals_temp.Clear();
-
-        // triangles_temp = null;
-        // uv_temp = null;
-        // vertices_temp = null;
-        // normals_temp = null;
     }
 
     public void SetVerticesFromPillars()
     {
+        Debug.Log("Setting verticesFrom Pillars");
         int i = 0;
         for (int z = 0; z < cg.tylesPerChunkZ + 1; z++)
         {
             for (int x = 0; x < cg.tylesPerChunkX + 1; x++, i++)
             {
-                // int pillarIndex = x + z * (tgt.tylesX + 1) + chunkCoordX * (cg.tylesPerChunkX + 1) + chunkCoordZ * (tgt.tylesX + 1) * (cg.tylesPerChunkZ + 1);
-
-                // int pillarIndex = x
-                // + z * (tgt.tylesX + 1)  // Local offset within the chunk
-                // + chunkCoordX * (cg.tylesPerChunkX + 1)  // Horizontal chunk offset
-                // + chunkCoordZ * (cg.tylesPerChunkX + 1) * (cg.tylesPerChunkZ + 1);  // Vertical chunk offset
-
-                int pillarIndex = x 
+                int pillarIndex = x
                 + z * (tgt.tylesX + 1)  // Local offset within the global grid
                 + chunkCoordX * cg.tylesPerChunkX  // Global horizontal chunk offset
                 + chunkCoordZ * (tgt.tylesX + 1) * cg.tylesPerChunkZ;  // Global vertical chunk offset
+                // Debug.Log($"Pillar {i}, {pillarIndex} : x: {x}, z: {z}, tyles per chunkx {cg.tylesPerChunkX}, position: {tgt.vPillars[pillarIndex].transform.position}, pillarOriginal ID: {tgt.vPillars[pillarIndex].name}");
 
-
-                Debug.Log($"Pillar {i}, {pillarIndex} : x: {x}, z: {z}, tyles per chunkx {cg.tylesPerChunkX}, position: {tgt.vPillars[pillarIndex].transform.position}, pillarOriginal ID: {tgt.vPillars[pillarIndex].name}");
+                Debug.Log("before added");
 
                 if (pillarIndex < tgt.vPillars.Length && tgt.vPillars[pillarIndex] != null)
                 {
                     Debug.Log("added!");
                     VPillar p = tgt.vPillars[pillarIndex];
-
+                    p.PushVerticesFromPillar(vertices_temp, uv_temp, normals_temp);
                     vertices_temp.Add(p.transform.position);
 
-
                     // Calculate normal (assuming quad is planar)
-                    normals_temp.Add(Vector3.zero);
+                    normals_temp.Add(Vector3.one);
 
-
-                    // Add UV coordinates
                     uv_temp.Add(new Vector2(x, z));
                 }
             }
-
         }
         // Debug.Log($"vertext GENERATION DONE. number of vertices added: {i} vertext GENERATION DONE. number of vertices added: {i} vertext GENERATION DONE. number of vertices added: {i} COUNT of vertices Temp {vertices_temp.Count}");
     }
@@ -202,7 +182,13 @@ public class TChunk : MonoBehaviour
                 {
                     Tyle t = tgt.tyles[tyleIndex];
                     // Debug.Log($"Tyle {t.name}, index: {tyleIndex}");
-                    AddTopQuad(x, z);
+                    // AddTopQuad(x, z);
+                    triangles_temp.AddRange(t.GetTopQuadVertices());
+
+                    // for (int j = 0; j < t.vPillars.Length; j++)
+                    // {
+                    //     Debug.Log($"pillar {j} from quad: {x}, {z} : {t.vPillars[j].vertexIndices[j]} ");
+                    // }
                 }
 
             }
@@ -232,7 +218,6 @@ public class TChunk : MonoBehaviour
             triangles_temp.Add(index);
         }
 
-
         // LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGING
         // for (int i = 0; i < t.Length; i++)
         // {
@@ -241,16 +226,9 @@ public class TChunk : MonoBehaviour
         //     Debug.Log($"triangle {i} sits at {vertices_temp[t[i]]}");
         // }
 
-
-
-
-
-        // Log triangle indices and check validity
-        int hardcodedVertexCount = 121; // Example hardcoded vertex count
-
         for (int i = 0; i < t.Length; i++)
         {
-            if (t[i] >= hardcodedVertexCount || t[i] < 0)
+            if (t[i] >= cg.vertPerChunkX * cg.vertPerChunkZ || t[i] < 0)
             {
                 Debug.LogError($"Invalid triangle index {t[i]} at position {i} in quad {x}, {z}.");
             }
@@ -366,10 +344,10 @@ public class TChunk : MonoBehaviour
 
 
 
-        v[0] = ty.GetVertex(vIndeces[0]) + offsetVector;
-        v[1] = ty.GetVertex(vIndeces[1]) + offsetVector;
-        v[2] = neighbourTy.GetVertex(vIndeces[2]) + offsetVector;
-        v[3] = neighbourTy.GetVertex(vIndeces[3]) + offsetVector;
+        v[0] = ty.GetVertexFromCornerPillar(vIndeces[0]) + offsetVector;
+        v[1] = ty.GetVertexFromCornerPillar(vIndeces[1]) + offsetVector;
+        v[2] = neighbourTy.GetVertexFromCornerPillar(vIndeces[2]) + offsetVector;
+        v[3] = neighbourTy.GetVertexFromCornerPillar(vIndeces[3]) + offsetVector;
 
         int[] t = new int[6];
 
@@ -406,27 +384,43 @@ public class TChunk : MonoBehaviour
 
     public void GenerateMesh()
     {
-        // Debug.Log($"mesh stats: vertices length {vertices.Length},triangles length {triangles.Length}, uv length {uv.Length}");
-        for (int i = 0; i < triangles.Length; i++)
+        // Debug log for mesh statistics
+        Debug.Log($"Mesh Stats: Vertices: {vertices_temp.Count}, Triangles: {triangles_temp.Count}, UVs: {uv_temp.Count}");
+
+        // Validate triangle indices to prevent out-of-bounds errors
+        for (int i = 0; i < triangles_temp.Count; i++)
         {
-            if (triangles[i] >= vertices.Length || triangles[i] < 0)
+            if (triangles_temp[i] >= vertices_temp.Count || triangles_temp[i] < 0)
             {
-                // Debug.Log($"Inside chunk {chunkCoordX}, {chunkCoordZ}");
-                Debug.LogError($"Triangle index out of bounds: {triangles[i]} (Vertex Count: {vertices.Length}) Inside chunk {chunkCoordX}, {chunkCoordZ}");
-                triangles[i] = vertices.Length - 1;
+                Debug.LogError($"Triangle index out of bounds: {triangles_temp[i]} (Vertex Count: {vertices_temp.Count}) Inside chunk {chunkCoordX}, {chunkCoordZ}");
+                triangles_temp[i] = vertices_temp.Count - 1; // Fix invalid index
             }
         }
-        Mesh mesh = new Mesh();
-        mesh.name = $"chunkmesh {chunkCoordX}/{chunkCoordZ}";
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.uv = uv;
-        mesh.normals = normals;
+
+        // Create and assign the mesh
+        Mesh mesh = new Mesh
+        {
+            name = $"chunkmesh {chunkCoordX}/{chunkCoordZ}"
+        };
+
+        mesh.SetVertices(vertices_temp);
+        mesh.SetTriangles(triangles_temp, 0);
+        mesh.SetUVs(0, uv_temp);
+        mesh.SetNormals(normals_temp);
         mesh.RecalculateNormals();
-        // RecalculateNormalsSeamless(mesh);
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
+
+        // Clear temporary lists after mesh generation
+        ClearMeshData();
+    }
+    private void ClearMeshData()
+    {
+        vertices_temp.Clear();
+        triangles_temp.Clear();
+        uv_temp.Clear();
+        normals_temp.Clear();
     }
 
     public void GenerateSidemesh()
