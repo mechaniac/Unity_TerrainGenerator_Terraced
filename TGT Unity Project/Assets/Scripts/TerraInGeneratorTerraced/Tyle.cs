@@ -82,7 +82,7 @@ public class Tyle : MonoBehaviour
     public int[] GetTopQuadVertices(){
         int[] t = new int[6];
 
-        Debug.Log($" pillar indices lenght: {vPillars[0].vertexIndices.Length}");
+        // Debug.Log($" pillar indices lenght: {vPillars[0].vertexIndices.Length}");
         t[0] = vPillars[0].vertexIndices[0];
         t[1]= vPillars[3].vertexIndices[3];
         t[2] = vPillars[2].vertexIndices[2];

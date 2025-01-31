@@ -73,8 +73,12 @@ public class TChunk : MonoBehaviour
 
         GenerateMesh();
         // ChunkLog();
-        // SetSideVerticesFromTyles();
-        // GenerateSidemesh();
+        if (true) //chunkCoordX == 0 && chunkCoordZ == 0
+        {
+            SetSideVerticesFromTyles();
+            GenerateSidemesh();
+        }
+
 
         LogMeshGen_02();
     }
@@ -146,12 +150,13 @@ public class TChunk : MonoBehaviour
                 + chunkCoordZ * (tgt.tylesX + 1) * cg.tylesPerChunkZ;  // Global vertical chunk offset
                 // Debug.Log($"Pillar {i}, {pillarIndex} : x: {x}, z: {z}, tyles per chunkx {cg.tylesPerChunkX}, position: {tgt.vPillars[pillarIndex].transform.position}, pillarOriginal ID: {tgt.vPillars[pillarIndex].name}");
 
-                Debug.Log("before added");
+                // Debug.Log("before added");
 
                 if (pillarIndex < tgt.vPillars.Length && tgt.vPillars[pillarIndex] != null)
                 {
-                    Debug.Log("added!");
+                    // Debug.Log("added!");
                     VPillar p = tgt.vPillars[pillarIndex];
+                    Debug.Log($" Push Vertices from Pillar {i}: {x}, {z} ---------------------------------------------------------------------- {p.name}");
                     p.PushVerticesFromPillar(vertices_temp, uv_temp, normals_temp);
                     vertices_temp.Add(p.transform.position);
 
@@ -197,49 +202,11 @@ public class TChunk : MonoBehaviour
     }
 
 
-    void AddTopQuad(int x, int z)
-    {
-        //vertices already set from pillars    
-        // int c = vertices_temp.Count;
-
-        // Add triangles
-        int oA = x + z * cg.vertPerChunkX; //the OFFSET MULTIPLIER
-
-        int[] t = new int[6];
-        t[0] = oA;
-        t[1] = cg.vertPerChunkX + oA;
-        t[2] = cg.vertPerChunkX + 1 + oA;
-        t[3] = cg.vertPerChunkX + 1 + oA;
-        t[4] = 1 + oA;
-        t[5] = oA;
-
-        foreach (var index in t)
-        {
-            triangles_temp.Add(index);
-        }
-
-        // LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGING
-        // for (int i = 0; i < t.Length; i++)
-        // {
-        //     Debug.Log($"triangle {i} is set to vertex {t[i]}");
-        //     Debug.Log($"vertices length: {vertices.Length}");
-        //     Debug.Log($"triangle {i} sits at {vertices_temp[t[i]]}");
-        // }
-
-        for (int i = 0; i < t.Length; i++)
-        {
-            if (t[i] >= cg.vertPerChunkX * cg.vertPerChunkZ || t[i] < 0)
-            {
-                Debug.LogError($"Invalid triangle index {t[i]} at position {i} in quad {x}, {z}.");
-            }
-        }
-
-    }
-
 
 
     public void SetSideVerticesFromTyles()
     {
+
 
         if (sideMesh == null) CreateSideMeshObject();
 
@@ -247,25 +214,94 @@ public class TChunk : MonoBehaviour
         sideTriangles = new List<int>();
         sideUv = new List<Vector2>();
 
+
+
         for (int z = 0, i = 0; z < cg.tylesPerChunkZ; z++)
         {
 
             for (int x = 0; x < cg.tylesPerChunkX; x++, i += 4)
             {
                 Tyle t = tgt.tyles[x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ];
-
-                for (int ti = 0; ti < 4; ti++)
+                
+                if (t.neighbours[2] != null)
                 {
-                    if (t.neighbours[ti] != null)
+                    // Pillar 3 - left up
+                    if (t.neighbours[2].vPillars[2].vertexIndices[2] != t.vPillars[3].vertexIndices[3])
                     {
-                        if (IsDirectionStepped(t, ti))
-                        {
-                            AddSideQuad(t, t.neighbours[ti], ti);
-                        }
+                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 1");
+                        sideVertices.Add(vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]]);
+                        sideVertices.Add(vertices_temp[t.vPillars[3].vertexIndices[3]]);
+                        sideVertices.Add(vertices_temp[t.vPillars[0].vertexIndices[0]]);
+
+                        sideTriangles.Add(sideVertices.Count - 3);
+                        sideTriangles.Add(sideVertices.Count - 2);
+                        sideTriangles.Add(sideVertices.Count - 1);
+
+                        sideUv.Add(new Vector2(t.neighbours[2].vPillars[2].transform.position.z, t.neighbours[2].vPillars[2].transform.position.y));
+                        sideUv.Add(new Vector2(t.vPillars[3].transform.position.z, t.vPillars[3].transform.position.y));
+                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.z, t.vPillars[0].transform.position.y));
+                    }
+
+                    // Pillar 0 - left down
+                    if (t.neighbours[2].vPillars[1].vertexIndices[1] != t.vPillars[0].vertexIndices[0])
+                    {
+                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 2");
+                        sideVertices.Add(vertices_temp[t.vPillars[0].vertexIndices[0]]);
+                        sideVertices.Add(vertices_temp[t.neighbours[2].vPillars[1].vertexIndices[1]]);
+                        sideVertices.Add(vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]]);
+
+                        sideTriangles.Add(sideVertices.Count - 3);
+                        sideTriangles.Add(sideVertices.Count - 2);
+                        sideTriangles.Add(sideVertices.Count - 1);
+
+                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.z, t.vPillars[0].transform.position.y));
+                        sideUv.Add(new Vector2(t.neighbours[2].vPillars[1].transform.position.z, t.neighbours[2].vPillars[1].transform.position.y));
+                        sideUv.Add(new Vector2(t.neighbours[2].vPillars[2].transform.position.z, t.neighbours[2].vPillars[2].transform.position.y));
                     }
                 }
+
+                if (t.neighbours[3] != null)
+                {
+                    if (t.neighbours[3].vPillars[3].vertexIndices[3] != t.vPillars[0].vertexIndices[0])
+                    {
+                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 3");
+                        sideVertices.Add(vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]]);
+                        sideVertices.Add(vertices_temp[t.vPillars[0].vertexIndices[0]]);
+                        sideVertices.Add(vertices_temp[t.vPillars[1].vertexIndices[1]]);
+
+
+                        sideTriangles.Add(sideVertices.Count - 3);
+                        sideTriangles.Add(sideVertices.Count - 2);
+                        sideTriangles.Add(sideVertices.Count - 1);
+
+                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[3].transform.position.x, t.neighbours[3].vPillars[3].transform.position.y));
+                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.x, t.vPillars[0].transform.position.y));
+                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[2].transform.position.x, t.neighbours[3].vPillars[2].transform.position.y));
+                    }
+
+                    if (t.neighbours[3].vPillars[2].vertexIndices[2] != t.vPillars[1].vertexIndices[1])
+                    {
+                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 4");
+                        sideVertices.Add(vertices_temp[t.vPillars[1].vertexIndices[1]]);
+                        sideVertices.Add(vertices_temp[t.neighbours[3].vPillars[2].vertexIndices[2]]);
+                        sideVertices.Add(vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]]);
+
+
+                        sideTriangles.Add(sideVertices.Count - 3);
+                        sideTriangles.Add(sideVertices.Count - 2);
+                        sideTriangles.Add(sideVertices.Count - 1);
+
+                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[3].transform.position.x, t.neighbours[3].vPillars[3].transform.position.y));
+                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.x, t.vPillars[0].transform.position.y));
+                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[2].transform.position.x, t.neighbours[3].vPillars[2].transform.position.y));
+                    }
+                }
+
+
             }
         }
+
+        Debug.Log($"sideTriangles added-------------------------------------------------------------------- : {sideTriangles.Count} ");
     }
 
 
@@ -413,7 +449,7 @@ public class TChunk : MonoBehaviour
         GetComponent<MeshCollider>().sharedMesh = mesh;
 
         // Clear temporary lists after mesh generation
-        ClearMeshData();
+        // ClearMeshData();
     }
     private void ClearMeshData()
     {

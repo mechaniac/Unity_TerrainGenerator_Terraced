@@ -142,28 +142,41 @@ public class VPillar : MonoBehaviour
     }
     public void PushVerticesFromPillar(List<Vector3> vertices, List<Vector2> uv, List<Vector3> normals)
     {
-        Debug.Log($"pushing");
+        Debug.Log($"pushing VertexHeights {vertexHeights[0]}, {vertexHeights[1]}, {vertexHeights[2]}, {vertexHeights[3]}");
         Dictionary<float, int> uniqueHeights = new Dictionary<float, int>();
         vertexIndices = new int[vertexHeights.Length];
 
-        for (int i = 0; i < vertexHeights.Length; i++)
+        float[] roundedVertexHeights = RoundArray(vertexHeights, 3);
+
+        for (int i = 0; i < roundedVertexHeights.Length; i++)
         {
-            if (uniqueHeights.TryGetValue(vertexHeights[i], out int existingIndex))
+            if (uniqueHeights.TryGetValue(roundedVertexHeights[i], out int existingIndex))
             {
                 vertexIndices[i] = existingIndex;
             }
             else
             {
-                Vector3 v = new Vector3(transform.position.x, vertexHeights[i], transform.position.z);
+                Vector3 v = new Vector3(transform.position.x, roundedVertexHeights[i], transform.position.z);
                 vertices.Add(v);
                 int newIndex = vertices.Count - 1;
-                uniqueHeights[vertexHeights[i]] = newIndex;
+                uniqueHeights[roundedVertexHeights[i]] = newIndex;
                 vertexIndices[i] = newIndex;
 
                 uv.Add(new Vector2(transform.position.x, transform.position.z));
                 normals.Add(new Vector3(0, 0, 0));
             }
         }
+        Debug.Log($"setting VertexIndices {vertexIndices[0]}, {vertexIndices[1]}, {vertexIndices[2]}, {vertexIndices[3]}");
+    }
+
+    public static float[] RoundArray(float[] values, int roundDecimals)
+    {
+        float[] roundedValues = new float[values.Length];
+        for (int i = 0; i < values.Length; i++)
+        {
+            roundedValues[i] = (float)Math.Round(values[i], roundDecimals);
+        }
+        return roundedValues;
     }
 
 
