@@ -178,6 +178,11 @@ public class TGeneratorT : MonoBehaviour
         // Debug.Log("File Name: " + mapName);
 
         cg = GetComponent<ChunkGenerator>();
+
+        if (topMeshMat != null && heightMap != null)
+        {
+            topMeshMat.SetTexture("_ColorMap", heightMap);
+        }
     }
 
     void InstantiateTyles()
@@ -243,6 +248,7 @@ public class TGeneratorT : MonoBehaviour
                 p.InstantiatePillar(random);
                 p.transform.parent = pillarHolder.transform;
                 p.name = $"Pillar_{i}_{x}/{z}";
+                p.tgt = this;
             }
         }
     }

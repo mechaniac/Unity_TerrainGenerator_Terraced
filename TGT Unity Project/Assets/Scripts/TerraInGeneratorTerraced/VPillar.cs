@@ -11,6 +11,8 @@ public class VPillar : MonoBehaviour
     // averages
     // sets bleeding borderValues 
 
+    public TGeneratorT tgt;
+
     public Tyle[] tyles;
     System.Random r;
 
@@ -162,7 +164,7 @@ public class VPillar : MonoBehaviour
                 uniqueHeights[roundedVertexHeights[i]] = newIndex;
                 vertexIndices[i] = newIndex;
 
-                uv.Add(new Vector2(transform.position.x, transform.position.z));
+                uv.Add(new Vector2(transform.position.x /tgt.widthPerPixel/tgt.tylesX, transform.position.z/tgt.widthPerPixel/tgt.tylesZ));
                 normals.Add(new Vector3(0, 0, 0));
             }
         }
