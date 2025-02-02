@@ -12,31 +12,23 @@ public class TChunk : MonoBehaviour
     int chunkCoordX;
     int chunkCoordZ;
 
-    int quadCountHelper;
-    int chunkCountHelper;
 
     Vector3 chunkOffset;
 
-    //TEMP Variables
+    //MESH fields
 
     List<Vector3> vertices_temp;
     List<int> triangles_temp;
     List<Vector2> uv_temp;
-
-    List<Vector3> vertices_temp_02;
-
     List<Vector3> normals_temp;
 
-    // ------------
-
-    Vector3[] vertices;
-    int[] triangles;
-    Vector2[] uv;
-    Vector3[] normals;
-
+    //SIDE MESH fields
     List<Vector3> sideVertices;
     List<int> sideTriangles;
     List<Vector2> sideUv;
+    List<Vector3> sideNormals;
+
+
 
     TGeneratorT tgt;
     ChunkGenerator cg;
@@ -75,38 +67,14 @@ public class TChunk : MonoBehaviour
         // ChunkLog();
         if (true) //chunkCoordX == 0 && chunkCoordZ == 0
         {
-            SetSideVerticesFromTyles();
+            SetSideMeshesFromTyles();
             GenerateSidemesh();
         }
 
 
-        LogMeshGen_02();
+        // LogMeshGen_02();
     }
 
-    void LogMeshGen_02()
-    {
-        Debug.Log($"List vertices temp 2 Count {vertices_temp_02.Count}");
-    }
-
-    void LogChunk()
-    {
-        Debug.Log($"Chunk ------------------------------------------------------------------------------------------------------------- {chunkCoordX}, {chunkCoordZ}");
-        Debug.Log($"Generated Vertices {vertices.Length}, temp: {vertices_temp.Count}");
-
-        Debug.Log($"Generated Triangles {triangles.Length / 3}, temp: {triangles_temp.Count / 3}");
-
-        Debug.Log($"Generated UVs: {uv.Length}, temp: {uv_temp.Count}");
-    }
-
-    void LogAllTriangles()
-    {
-        for (int i = 0; i < triangles.Length; i++)
-        {
-            if (i % 6 == 0) { Debug.Log($"{i / 6} next quad"); }
-
-            Debug.Log($"triangle {i} points to vertex {triangles[i]}, sitting at {vertices[triangles[i]]}");
-        }
-    }
 
 
     public void DistortVerticesSine(float amplitude, float frequency, float phase)
@@ -131,14 +99,12 @@ public class TChunk : MonoBehaviour
         vertices_temp = new List<Vector3>();
         normals_temp = new List<Vector3>();
 
-        vertices_temp_02 = new List<Vector3>();
-
         chunkOffset = new Vector3(chunkCoordX * cg.tylesPerChunkX * tgt.widthPerPixel, 0, chunkCoordZ * cg.tylesPerChunkZ * tgt.widthPerPixel);
     }
 
     public void SetVerticesFromPillars()
     {
-        Debug.Log("Setting verticesFrom Pillars");
+        // Debug.Log("Setting verticesFrom Pillars");
         int i = 0;
         for (int z = 0; z < cg.tylesPerChunkZ + 1; z++)
         {
@@ -156,7 +122,7 @@ public class TChunk : MonoBehaviour
                 {
                     // Debug.Log("added!");
                     VPillar p = tgt.vPillars[pillarIndex];
-                    Debug.Log($" Push Vertices from Pillar {i}: {x}, {z} ---------------------------------------------------------------------- {p.name}");
+                    // Debug.Log($" Push Vertices from Pillar {i}: {x}, {z} ---------------------------------------------------------------------- {p.name}");
                     p.PushVerticesFromPillar(vertices_temp, uv_temp, normals_temp);
                     vertices_temp.Add(p.transform.position);
 
@@ -167,7 +133,6 @@ public class TChunk : MonoBehaviour
                 }
             }
         }
-        // Debug.Log($"vertext GENERATION DONE. number of vertices added: {i} vertext GENERATION DONE. number of vertices added: {i} vertext GENERATION DONE. number of vertices added: {i} COUNT of vertices Temp {vertices_temp.Count}");
     }
 
     public void SetMeshesFromTyles()
@@ -186,14 +151,8 @@ public class TChunk : MonoBehaviour
                 if (tgt.tyles[tyleIndex] != null)
                 {
                     Tyle t = tgt.tyles[tyleIndex];
-                    // Debug.Log($"Tyle {t.name}, index: {tyleIndex}");
-                    // AddTopQuad(x, z);
                     triangles_temp.AddRange(t.GetTopQuadVertices());
 
-                    // for (int j = 0; j < t.vPillars.Length; j++)
-                    // {
-                    //     Debug.Log($"pillar {j} from quad: {x}, {z} : {t.vPillars[j].vertexIndices[j]} ");
-                    // }
                 }
 
             }
@@ -204,96 +163,218 @@ public class TChunk : MonoBehaviour
 
 
 
-    public void SetSideVerticesFromTyles()
+    public void SetSideMeshesFromTyles()
     {
-
-
         if (sideMesh == null) CreateSideMeshObject();
 
         sideVertices = new List<Vector3>();
         sideTriangles = new List<int>();
         sideUv = new List<Vector2>();
+        sideNormals = new List<Vector3>();
 
-
+        float y_adjustment = tgt.heightMultiplier;
 
         for (int z = 0, i = 0; z < cg.tylesPerChunkZ; z++)
         {
-
             for (int x = 0; x < cg.tylesPerChunkX; x++, i += 4)
             {
                 Tyle t = tgt.tyles[x + z * tgt.tylesX + chunkCoordX * cg.tylesPerChunkX + chunkCoordZ * tgt.tylesX * cg.tylesPerChunkZ];
-                
                 if (t.neighbours[2] != null)
                 {
+                    //------------First Quad First Triangle-------- direction -x
                     // Pillar 3 - left up
                     if (t.neighbours[2].vPillars[2].vertexIndices[2] != t.vPillars[3].vertexIndices[3])
                     {
-                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 1");
-                        sideVertices.Add(vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]]);
-                        sideVertices.Add(vertices_temp[t.vPillars[3].vertexIndices[3]]);
-                        sideVertices.Add(vertices_temp[t.vPillars[0].vertexIndices[0]]);
+                        // Debug.Log($"Tyle {t.name}, {x}, {z}. sideTriangle 1");
+                        Vector3[] vs = new Vector3[3];
+                        vs[0] = vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]];
+                        vs[1] = vertices_temp[t.vPillars[3].vertexIndices[3]];
+                        vs[2] = vertices_temp[t.vPillars[0].vertexIndices[0]];
+
+                        sideVertices.Add(vs[0]);
+                        sideVertices.Add(vs[1]);
+                        sideVertices.Add(vs[2]);
 
                         sideTriangles.Add(sideVertices.Count - 3);
                         sideTriangles.Add(sideVertices.Count - 2);
                         sideTriangles.Add(sideVertices.Count - 1);
 
-                        sideUv.Add(new Vector2(t.neighbours[2].vPillars[2].transform.position.z, t.neighbours[2].vPillars[2].transform.position.y));
-                        sideUv.Add(new Vector2(t.vPillars[3].transform.position.z, t.vPillars[3].transform.position.y));
-                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.z, t.vPillars[0].transform.position.y));
-                    }
 
-                    // Pillar 0 - left down
+                        if (vs[0].y < vs[1].y) //if face is up or down ()
+                        {
+                            sideUv.Add(new Vector2(0, vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.vPillars[3].vertexIndices[3]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.vPillars[0].vertexIndices[0]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(-1, 0, 0));
+                                sideNormals.Add(new Vector3(-1, 0, 0));
+                                sideNormals.Add(new Vector3(-1, 0, 0));
+                            }
+
+                        }
+                        else
+                        {
+                            sideUv.Add(new Vector2(1, vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.vPillars[3].vertexIndices[3]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.vPillars[0].vertexIndices[0]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(1, 0, 0));
+                                sideNormals.Add(new Vector3(1, 0, 0));
+                                sideNormals.Add(new Vector3(1, 0, 0));
+                            }
+
+                        }
+
+
+                    }
+                    //------------First Quad Second Triangle-------- direction -x
                     if (t.neighbours[2].vPillars[1].vertexIndices[1] != t.vPillars[0].vertexIndices[0])
                     {
-                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 2");
-                        sideVertices.Add(vertices_temp[t.vPillars[0].vertexIndices[0]]);
-                        sideVertices.Add(vertices_temp[t.neighbours[2].vPillars[1].vertexIndices[1]]);
-                        sideVertices.Add(vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]]);
+                        // Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 2");
+                        Vector3[] vs = new Vector3[3];
+                        vs[0] = vertices_temp[t.vPillars[0].vertexIndices[0]];
+                        vs[1] = vertices_temp[t.neighbours[2].vPillars[1].vertexIndices[1]];
+                        vs[2] = vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]];
+
+                        sideVertices.Add(vs[0]);
+                        sideVertices.Add(vs[1]);
+                        sideVertices.Add(vs[2]);
 
                         sideTriangles.Add(sideVertices.Count - 3);
                         sideTriangles.Add(sideVertices.Count - 2);
                         sideTriangles.Add(sideVertices.Count - 1);
 
-                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.z, t.vPillars[0].transform.position.y));
-                        sideUv.Add(new Vector2(t.neighbours[2].vPillars[1].transform.position.z, t.neighbours[2].vPillars[1].transform.position.y));
-                        sideUv.Add(new Vector2(t.neighbours[2].vPillars[2].transform.position.z, t.neighbours[2].vPillars[2].transform.position.y));
+                        if (vs[0].y > vs[1].y) //if face is up or down ()
+                        {
+                            sideUv.Add(new Vector2(1, vertices_temp[t.vPillars[0].vertexIndices[0]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.neighbours[2].vPillars[1].vertexIndices[1]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(-1, 0, 0));
+                                sideNormals.Add(new Vector3(-1, 0, 0));
+                                sideNormals.Add(new Vector3(-1, 0, 0));
+                            }
+
+                        }
+                        else
+                        {
+                            sideUv.Add(new Vector2(0, vertices_temp[t.vPillars[0].vertexIndices[0]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.neighbours[2].vPillars[1].vertexIndices[1]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.neighbours[2].vPillars[2].vertexIndices[2]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(1, 0, 0));
+                                sideNormals.Add(new Vector3(1, 0, 0));
+                                sideNormals.Add(new Vector3(1, 0, 0));
+                            }
+
+                        }
+
+
                     }
                 }
 
                 if (t.neighbours[3] != null)
                 {
+                    //------------Second Quad First Triangle-------- direction -z
                     if (t.neighbours[3].vPillars[3].vertexIndices[3] != t.vPillars[0].vertexIndices[0])
                     {
-                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 3");
-                        sideVertices.Add(vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]]);
-                        sideVertices.Add(vertices_temp[t.vPillars[0].vertexIndices[0]]);
-                        sideVertices.Add(vertices_temp[t.vPillars[1].vertexIndices[1]]);
+
+                        Vector3[] vs = new Vector3[3];
+                        vs[0] = vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]];
+                        vs[1] = vertices_temp[t.vPillars[0].vertexIndices[0]];
+                        vs[2] = vertices_temp[t.vPillars[1].vertexIndices[1]];
+
+                        sideVertices.Add(vs[0]);
+                        sideVertices.Add(vs[1]);
+                        sideVertices.Add(vs[2]);
 
 
                         sideTriangles.Add(sideVertices.Count - 3);
                         sideTriangles.Add(sideVertices.Count - 2);
                         sideTriangles.Add(sideVertices.Count - 1);
 
-                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[3].transform.position.x, t.neighbours[3].vPillars[3].transform.position.y));
-                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.x, t.vPillars[0].transform.position.y));
-                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[2].transform.position.x, t.neighbours[3].vPillars[2].transform.position.y));
-                    }
 
+                        if (vs[0].y < vs[1].y) //if face is up or down ()
+                        {
+                            sideUv.Add(new Vector2(0, vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.vPillars[0].vertexIndices[0]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.vPillars[1].vertexIndices[1]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(0, 0, -1));
+                                sideNormals.Add(new Vector3(0, 0, -1));
+                                sideNormals.Add(new Vector3(0, 0, -1));
+                            }
+
+                        }
+                        else
+                        {
+                            sideUv.Add(new Vector2(1, vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.vPillars[0].vertexIndices[0]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.vPillars[1].vertexIndices[1]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(0, 0, 1));
+                                sideNormals.Add(new Vector3(0, 0, 1));
+                                sideNormals.Add(new Vector3(0, 0, 1));
+                            }
+
+                        }
+
+
+
+                    }
+                    //------------Second Quad Second Triangle-------- direction -z
                     if (t.neighbours[3].vPillars[2].vertexIndices[2] != t.vPillars[1].vertexIndices[1])
                     {
-                        Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 4");
-                        sideVertices.Add(vertices_temp[t.vPillars[1].vertexIndices[1]]);
-                        sideVertices.Add(vertices_temp[t.neighbours[3].vPillars[2].vertexIndices[2]]);
-                        sideVertices.Add(vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]]);
+                        Vector3[] vs = new Vector3[3];
+                        vs[0] = vertices_temp[t.vPillars[1].vertexIndices[1]];
+                        vs[1] = vertices_temp[t.neighbours[3].vPillars[2].vertexIndices[2]];
+                        vs[2] = vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]];
+                        // Debug.Log($"Tyle {i}, {x}, {z}. sideTriangle 4");
+
+                        sideVertices.Add(vs[0]);
+                        sideVertices.Add(vs[1]);
+                        sideVertices.Add(vs[2]);
 
 
                         sideTriangles.Add(sideVertices.Count - 3);
                         sideTriangles.Add(sideVertices.Count - 2);
                         sideTriangles.Add(sideVertices.Count - 1);
 
-                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[3].transform.position.x, t.neighbours[3].vPillars[3].transform.position.y));
-                        sideUv.Add(new Vector2(t.vPillars[0].transform.position.x, t.vPillars[0].transform.position.y));
-                        sideUv.Add(new Vector2(t.neighbours[3].vPillars[2].transform.position.x, t.neighbours[3].vPillars[2].transform.position.y));
+                        if (vs[0].y > vs[1].y) //if face is up or down ()
+                        {
+                            sideUv.Add(new Vector2(1, vertices_temp[t.vPillars[1].vertexIndices[1]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.neighbours[3].vPillars[2].vertexIndices[2]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(0, 0, -1));
+                                sideNormals.Add(new Vector3(0, 0, -1));
+                                sideNormals.Add(new Vector3(0, 0, -1));
+                            }
+
+                        }
+                        else
+                        {
+                            sideUv.Add(new Vector2(0, vertices_temp[t.vPillars[1].vertexIndices[1]].y / y_adjustment));
+                            sideUv.Add(new Vector2(0, vertices_temp[t.neighbours[3].vPillars[2].vertexIndices[2]].y / y_adjustment));
+                            sideUv.Add(new Vector2(1, vertices_temp[t.neighbours[3].vPillars[3].vertexIndices[3]].y / y_adjustment));
+                            if (tgt.generateNormals)
+                            {
+                                sideNormals.Add(new Vector3(0, 0, 1));
+                                sideNormals.Add(new Vector3(0, 0, 1));
+                                sideNormals.Add(new Vector3(0, 0, 1));
+                            }
+
+                        }
+
+
+
                     }
                 }
 
@@ -301,7 +382,7 @@ public class TChunk : MonoBehaviour
             }
         }
 
-        Debug.Log($"sideTriangles added-------------------------------------------------------------------- : {sideTriangles.Count} ");
+        // Debug.Log($"sideTriangles added-------------------------------------------------------------------- : {sideTriangles.Count} ");
     }
 
 
@@ -339,89 +420,10 @@ public class TChunk : MonoBehaviour
 
 
 
-    void AddSideQuad(Tyle ty, Tyle neighbourTy, int neighbourDirection)
-    {
-        //OffsetFromCenter Prep
-
-        float chunkOffsetX = 0f;
-        float chunkOffsetZ = 0f;
-
-        if (tgt.setMapToSceneCenter)
-        {
-            chunkOffsetX = -cg.tylesPerChunkX * cg.chunkCountX * tgt.widthPerPixel / 2f;
-            chunkOffsetZ = -cg.tylesPerChunkZ * cg.chunkCountZ * tgt.widthPerPixel / 2f;
-        }
-        Vector3 offsetVector = new Vector3(chunkOffsetX, 0, chunkOffsetZ);
-
-        // Begin Code
-
-
-        int startVertex = sideVertices.Count;   //continuing the list
-
-        Vector3[] v = new Vector3[4];   //the VERTICES
-
-        int[] vIndeces;
-
-        switch (neighbourDirection)
-        {
-            default:
-                vIndeces = new int[] { 1, 2, 0, 3 };
-                break;
-            case 1:
-                vIndeces = new int[] { 2, 3, 1, 0 };
-                break;
-            case 2:
-                vIndeces = new int[] { 3, 0, 2, 1 };
-                break;
-            case 3:
-                vIndeces = new int[] { 0, 1, 3, 2 };
-                break;
-        }
-
-
-
-        v[0] = ty.GetVertexFromCornerPillar(vIndeces[0]) + offsetVector;
-        v[1] = ty.GetVertexFromCornerPillar(vIndeces[1]) + offsetVector;
-        v[2] = neighbourTy.GetVertexFromCornerPillar(vIndeces[2]) + offsetVector;
-        v[3] = neighbourTy.GetVertexFromCornerPillar(vIndeces[3]) + offsetVector;
-
-        int[] t = new int[6];
-
-        t[0] = startVertex;
-        t[1] = startVertex + 1;
-        t[2] = startVertex + 3;
-        t[3] = startVertex;
-        t[4] = startVertex + 3;
-        t[5] = startVertex + 2;
-
-
-        Vector2[] uv = new Vector2[4];
-
-        uv[0] = new Vector2(0, v[0].y / tgt.widthPerPixel);
-        uv[1] = new Vector2(1, v[1].y / tgt.widthPerPixel);
-        uv[2] = new Vector2(0, v[2].y / tgt.widthPerPixel);
-        uv[3] = new Vector2(1, v[3].y / tgt.widthPerPixel);
-
-
-        sideVertices.AddRange(v);
-        sideTriangles.AddRange(t);
-        sideUv.AddRange(uv);
-    }
-    void ValidateTriangleIndices(int[] t, int vertexCount)
-    {
-        for (int i = 0; i < t.Length; i++)
-        {
-            if (t[i] >= vertexCount || t[i] < 0)
-            {
-                Debug.LogError($"Invalid triangle index: {t[i]} at position {i}. Vertex count: {vertexCount}");
-            }
-        }
-    }
-
     public void GenerateMesh()
     {
         // Debug log for mesh statistics
-        Debug.Log($"Mesh Stats: Vertices: {vertices_temp.Count}, Triangles: {triangles_temp.Count}, UVs: {uv_temp.Count}");
+        // Debug.Log($"Mesh Stats: Vertices: {vertices_temp.Count}, Triangles: {triangles_temp.Count}, UVs: {uv_temp.Count}");
 
         // Validate triangle indices to prevent out-of-bounds errors
         for (int i = 0; i < triangles_temp.Count; i++)
@@ -463,9 +465,14 @@ public class TChunk : MonoBehaviour
     {
         Mesh mesh = new Mesh();
 
-        mesh.vertices = sideVertices.ToArray();
-        mesh.triangles = sideTriangles.ToArray();
-        mesh.uv = sideUv.ToArray();
+        mesh.SetVertices(sideVertices);
+        mesh.SetTriangles(sideTriangles, 0);
+        mesh.SetUVs(0, sideUv);
+        if (tgt.generateNormals)
+        {
+            mesh.SetNormals(sideNormals);
+        }
+
 
         // mesh.RecalculateNormals();
         RecalculateNormalsSeamless(mesh);

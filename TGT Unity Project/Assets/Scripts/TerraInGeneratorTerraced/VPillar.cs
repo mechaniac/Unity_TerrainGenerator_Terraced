@@ -144,7 +144,7 @@ public class VPillar : MonoBehaviour
     }
     public void PushVerticesFromPillar(List<Vector3> vertices, List<Vector2> uv, List<Vector3> normals)
     {
-        Debug.Log($"pushing VertexHeights {vertexHeights[0]}, {vertexHeights[1]}, {vertexHeights[2]}, {vertexHeights[3]}");
+        // Debug.Log($"pushing VertexHeights {vertexHeights[0]}, {vertexHeights[1]}, {vertexHeights[2]}, {vertexHeights[3]}");
         Dictionary<float, int> uniqueHeights = new Dictionary<float, int>();
         vertexIndices = new int[vertexHeights.Length];
 
@@ -168,7 +168,7 @@ public class VPillar : MonoBehaviour
                 normals.Add(new Vector3(0, 0, 0));
             }
         }
-        Debug.Log($"setting VertexIndices {vertexIndices[0]}, {vertexIndices[1]}, {vertexIndices[2]}, {vertexIndices[3]}");
+        // Debug.Log($"setting VertexIndices {vertexIndices[0]}, {vertexIndices[1]}, {vertexIndices[2]}, {vertexIndices[3]}");
     }
 
     public static float[] RoundArray(float[] values, int roundDecimals)

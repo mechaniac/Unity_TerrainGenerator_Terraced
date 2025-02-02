@@ -33,7 +33,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorMap:
-        m_Texture: {fileID: 2800000, guid: 265806ee0e823e94a83606641cab6a4d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 194a2b8c6003910489df9879cf4943e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorMaskMap:
@@ -143,7 +143,7 @@ Material:
     - _NormalMapTiling: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Period: 0.93
+    - _Period: 0.87
     - _Persistance: 0.621
     - _PositionBack: 950
     - _PositionFront: 0
@@ -173,7 +173,7 @@ Material:
     - _CoverColor: {r: 0.8928213, g: 1, b: 0.4103774, a: 0}
     - _CoverSpecularColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Sizing: {r: 12, g: 12, b: 0, a: 0}
+    - _Sizing: {r: 1, g: 4, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecularColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0}
   m_BuildTextureStacks: []

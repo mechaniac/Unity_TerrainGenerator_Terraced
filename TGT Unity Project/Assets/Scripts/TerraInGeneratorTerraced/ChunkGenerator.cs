@@ -37,10 +37,10 @@ public class ChunkGenerator : MonoBehaviour
     {
         tgt = GetComponent<TGeneratorT>();
 
-        if (tgt.heightMap.width % 2 != 0)
-        {
-            Debug.LogWarning($"heightMap width ({tgt.heightMap.width}) is not even. ChunkCreation might fail");
-        }
+        // if (tgt.heightMap.width % 2 != 0)
+        // {
+        //     Debug.LogWarning($"heightMap width ({tgt.heightMap.width}) is not even. ChunkCreation might fail");
+        // }
 
         float cCX = tgt.heightMap.width / (float)tylesPerChunkX;
         float cCZ = tgt.heightMap.height / (float)tylesPerChunkZ;
@@ -95,7 +95,7 @@ public class ChunkGenerator : MonoBehaviour
         {
             for (int x = 0; x < chunkCountX; x++, i++)
             {
-                Debug.Log($"NEW chunk created: {i} at {x}, {z}");
+                // Debug.Log($"NEW chunk created: {i} at {x}, {z}");
                 TChunk c = chunks[i] = Instantiate(chunkPrefab);
                 c.name = tgt.mapName + "_chunk_" + i + "_" + x + "_" + z;
                 c.gameObject.SetActive(true);

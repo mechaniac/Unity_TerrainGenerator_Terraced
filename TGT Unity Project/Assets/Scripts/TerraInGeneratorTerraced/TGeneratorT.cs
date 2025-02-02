@@ -36,6 +36,8 @@ public class TGeneratorT : MonoBehaviour
 
     public bool setMapToSceneCenter;
 
+    public bool generateNormals;
+
     public Tyle tylePrefab;
     public VPillar vPillarPrefab;
 
