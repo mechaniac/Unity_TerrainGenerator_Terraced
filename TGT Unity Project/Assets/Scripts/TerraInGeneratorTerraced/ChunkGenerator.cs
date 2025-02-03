@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace terrain { 
+
 [RequireComponent(typeof(TGeneratorT))]
 [ExecuteInEditMode]
 public class ChunkGenerator : MonoBehaviour
@@ -19,7 +21,7 @@ public class ChunkGenerator : MonoBehaviour
     [HideInInspector]
     public int vertPerChunkX;
 
-    
+
     [HideInInspector]
     public int vertPerChunkZ;
 
@@ -45,8 +47,8 @@ public class ChunkGenerator : MonoBehaviour
         float cCX = tgt.heightMap.width / (float)tylesPerChunkX;
         float cCZ = tgt.heightMap.height / (float)tylesPerChunkZ;
 
-        vertPerChunkX = tylesPerChunkX+1;
-        vertPerChunkZ = tylesPerChunkZ+1;
+        vertPerChunkX = tylesPerChunkX + 1;
+        vertPerChunkZ = tylesPerChunkZ + 1;
 
 
         chunkCountX = (int)cCX;
@@ -114,4 +116,5 @@ public class ChunkGenerator : MonoBehaviour
 
 
 
+}
 }
