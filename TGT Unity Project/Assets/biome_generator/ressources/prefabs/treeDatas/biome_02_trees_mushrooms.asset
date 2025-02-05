@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aca5a501c6e7b54fbec3dc89b88116f, type: 3}
+  m_Name: biome_02_trees_mushrooms
+  m_EditorClassIdentifier: 
+  trees_big:
+  - {fileID: 3464016148916500431, guid: 022ea40ca90f0204a9e6ad983bb0aba8, type: 3}
+  - {fileID: -1097523119347675436, guid: 1b24478d2ebd0be49835bfe9641c1ae1, type: 3}
+  - {fileID: -2018878977495270606, guid: 35e1eaf89a558c749bdfe81eb7ab1c97, type: 3}
+  trees_medium:
+  - {fileID: 5031457808378886040, guid: 4027c32378a635a49b59a64f58fadea1, type: 3}
+  - {fileID: 8776371816803123092, guid: 09688e1a5f6f3374f9e56eb4a788acff, type: 3}
+  - {fileID: 6539887659476492890, guid: 3dfd8e0fe6bc3524daf708b86aafb345, type: 3}
+  trees_small:
+  - {fileID: 781914580029699154, guid: 8846dc3348d50294995e84af0c2e2c8d, type: 3}
+  - {fileID: 2932093192211042418, guid: 61910353a268fc64991ab90f17a1a539, type: 3}
+  - {fileID: 3647468353611446159, guid: cead7604c3a77fc43bde64cd81c6779e, type: 3}
+  bushes_01:
+  - {fileID: 5082219629448854966, guid: e2b85b31b020bbc4eba173b887fb523e, type: 3}
+  treeSize: 1
+  bushSize: 0.5

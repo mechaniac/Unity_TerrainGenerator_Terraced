@@ -3,17 +3,7 @@ guid: 835e6a47084cc1e49ae9d7d8c831fd0a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: sidemeshMat
-    second: {fileID: 2100000, guid: 635e1de3f10001841a8e0e0f64dee716, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: topmeshMat
-    second: {fileID: 2100000, guid: dd954cd24f271084ca7574c8e4cc7c2a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

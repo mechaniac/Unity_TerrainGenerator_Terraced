@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aca5a501c6e7b54fbec3dc89b88116f, type: 3}
+  m_Name: biome_01_trees_cactus
+  m_EditorClassIdentifier: 
+  trees_big:
+  - {fileID: 6389399413910611728, guid: ff8784d728d1daf448a7332021eda8eb, type: 3}
+  - {fileID: 803496539348488381, guid: bd9c4067aade80040b716b6143a210da, type: 3}
+  - {fileID: 2964596391437017348, guid: fc2153f70b4ba6244aad2bd569b8a2b5, type: 3}
+  trees_medium:
+  - {fileID: 1320237819010092481, guid: 8e711d2c7d55dfb47b717ca49e3d2ca9, type: 3}
+  - {fileID: -6639457267032590600, guid: 1b0c61ed31144014d911f7c2defbd6a7, type: 3}
+  - {fileID: 7771047276014112890, guid: 3902be49c8c332644bb2eb601ac22928, type: 3}
+  trees_small:
+  - {fileID: 5633824247178122653, guid: 9dd0a6b916d0e474ca125c6bf2200d3f, type: 3}
+  - {fileID: 2544461835955013598, guid: dc1ef3390912b6e49815c87d6635b872, type: 3}
+  - {fileID: 7875294225153982056, guid: 4393814c92acb594b93ff5d796d102da, type: 3}
+  bushes_01:
+  - {fileID: 5082219629448854966, guid: e2b85b31b020bbc4eba173b887fb523e, type: 3}
+  treeSize: 0.5
+  bushSize: 1

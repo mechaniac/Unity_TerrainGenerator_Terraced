@@ -455,6 +455,10 @@ namespace terrain
             GetComponent<MeshFilter>().mesh = mesh;
             GetComponent<MeshCollider>().sharedMesh = mesh;
 
+            // Set the GameObject's layer to "ground"
+            // Make sure that the layer "ground" exists in your Tags & Layers settings.
+            gameObject.layer = LayerMask.NameToLayer("ground");
+
             // Clear temporary lists after mesh generation
             // ClearMeshData();
         }
@@ -484,6 +488,10 @@ namespace terrain
             //transform.Find($"sidemesh {chunkCoordX}/{chunkCoordZ}").GetComponent<MeshFilter>().mesh = mesh;
             sideMesh.GetComponent<MeshFilter>().mesh = mesh;
             sideMesh.GetComponent<MeshCollider>().sharedMesh = mesh;
+
+            // Set the sideMesh GameObject to the "cliff" layer.
+            // Ensure "cliff" exists in your Tags & Layers settings.
+            sideMesh.layer = LayerMask.NameToLayer("cliff");
         }
 
         static void RecalculateNormalsSeamless(Mesh mesh)

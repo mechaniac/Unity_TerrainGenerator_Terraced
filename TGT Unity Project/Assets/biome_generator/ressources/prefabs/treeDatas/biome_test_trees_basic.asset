@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aca5a501c6e7b54fbec3dc89b88116f, type: 3}
+  m_Name: biome_test_trees_basic
+  m_EditorClassIdentifier: 
+  trees_big:
+  - {fileID: 7458048689770790302, guid: 7405fd94b2518d54fafc4517b4203f52, type: 3}
+  - {fileID: 7458048689770790302, guid: 993b61cfddfb5c04a88e7806bd387f4e, type: 3}
+  trees_medium:
+  - {fileID: 1067419766146415345, guid: fe623e8a830d91649af0b7439d0a7317, type: 3}
+  - {fileID: 1067419766146415345, guid: b15c9ea529cb90e4e92bb6d6966cab22, type: 3}
+  trees_small:
+  - {fileID: 2663691379060106999, guid: cd3e6a6b80349d9429a124287c4e0b29, type: 3}
+  - {fileID: 2663691379060106999, guid: cd3e6a6b80349d9429a124287c4e0b29, type: 3}
+  bushes_01:
+  - {fileID: 5429800436660933189, guid: fbf4870bd6414ea4281fbdf80e9c34a3, type: 3}
+  treeSize: 1
+  bushSize: 0.5

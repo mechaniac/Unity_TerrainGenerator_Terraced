@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f24bc5d9af10d4b90dfe8e591f915a, type: 3}
+  m_Name: biome_03
+  m_EditorClassIdentifier: 
+  idColor: {r: 0.43137255, g: 0.003921569, b: 0.99607843, a: 1}
+  colors:
+  - {r: 0.8461845, g: 0.22272164, b: 0.8584906, a: 0}
+  - {r: 0.36249065, g: 0.15979885, b: 0.5377358, a: 1}
+  - {r: 1, g: 0.48584908, b: 0.63439727, a: 1}
+  td:
+  - {fileID: 11400000, guid: 703a692f134e1de46ad801e80391bc60, type: 2}
+  cutoff_small: 0.3
+  cutoff_medium: 0.6
+  bush_offset_from_tree: 2
+  treeMat: {fileID: 2100000, guid: f8b31091e98904941abe7fbc704003fd, type: 2}
+  generateMoss: 0
+  mossSize: 1
+  mossAmount: 1
+  mossPrefabs:
+  - {fileID: 6860848932627300352, guid: f52b4d66a8ab6ad4da39e7ab6ea5f596, type: 3}
+  - {fileID: 2994490404442690842, guid: fe9fc909a85a53845b733542c471fc54, type: 3}
+  - {fileID: 8672324506332584297, guid: 92af2c931b250f54fade8e38394e4cdd, type: 3}
+  mossMat: {fileID: 2100000, guid: cdb69423e25cd3d4fa6adbcd5ee31891, type: 2}
+  bushMat: {fileID: 2100000, guid: 0b9b56652917a214bb9cb277bea5f2ab, type: 2}

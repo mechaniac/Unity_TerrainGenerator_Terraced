@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aca5a501c6e7b54fbec3dc89b88116f, type: 3}
+  m_Name: biome_03_trees_towers
+  m_EditorClassIdentifier: 
+  trees_big:
+  - {fileID: 5190211603045044212, guid: 0a258a9e2483afb44ae903563c86fd60, type: 3}
+  - {fileID: 337049898336467669, guid: 77d18b186d0d9da4eb0890c4ed9e5900, type: 3}
+  - {fileID: -160297673355587190, guid: 4117b2c6d37de0f4fb3caccb483133a5, type: 3}
+  trees_medium:
+  - {fileID: 2462019223895453020, guid: d7fdb07386a9a4f4fbc0598b68c0f74e, type: 3}
+  - {fileID: -895406649936628960, guid: 2a92fb0fccfca5749a0e7c50c1b5aeb3, type: 3}
+  - {fileID: 6949933481288469761, guid: c261ac4cf7cd3024b9424896348358d9, type: 3}
+  trees_small:
+  - {fileID: 2478965874851814641, guid: 926f8320f1e78474d912a70be0806414, type: 3}
+  - {fileID: 7521585711457630903, guid: 00da9491ace0bfa4f9c44702a19673d8, type: 3}
+  - {fileID: 2777503311784444678, guid: e685bb8f983499149bdfa698f5bf3ac0, type: 3}
+  bushes_01:
+  - {fileID: 5082219629448854966, guid: e2b85b31b020bbc4eba173b887fb523e, type: 3}
+  treeSize: 1
+  bushSize: 0.5
