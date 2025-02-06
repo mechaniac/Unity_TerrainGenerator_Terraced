@@ -74,6 +74,10 @@ namespace biome
                 bG.DeleteBiomes();
             }
 
+            if(GUILayout.Button("GENERATE ALL")){
+                bG.GenerateBiomes();
+            }
+
 
         }
 

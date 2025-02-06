@@ -28,7 +28,7 @@ namespace biome
         Material mossMatToAssign;
 
         public Material bushMat;
-        Material bushMatToAssign;
+        // Material bushMatToAssign;
 
 
 
@@ -73,7 +73,8 @@ namespace biome
                         if (renderer != null)
                         {
                             // Assign the material to the MeshRenderer component
-                            renderer.material = bushMatToAssign;
+                            Debug.Log($"assigning material");
+                            renderer.material = bushMat;
                         }
                     }
                     return bushes;
@@ -270,8 +271,8 @@ namespace biome
         }
         public void SetBushMaterial(Color c)
         {
-            if (bushMatToAssign != null) {
-                bushMatToAssign.SetColor("_BaseColor", c);
+            if (bushMat != null) {
+                bushMat.SetColor("_BaseColor", c);
             }
         }
     }

@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
-using UnityEngine;
+// using UnityEngine;
 using System.IO;
-using System.Text; 
+using System.Text;
+// using UnityEditor;
+using UnityEngine.VFX;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+using UnityEngine;
 
 namespace biome
 {
@@ -29,10 +36,114 @@ namespace biome
 
         public Material groundMat;
 
+        private Texture originalTexture;
+
         public static float biggestColorDifference = 0f;
 
         System.Random r; //ONE random to rule them all. => deterministic random. gets passed down to any randomization
         // public int seed = 123;
+
+        void Start()
+        {
+
+        }
+
+
+        public void GenerateBiomes()
+        {
+            GenerateHitPoints();
+            InstantiateBiomesFromHitpoints();
+            GenerateTextureFromSize();
+            SetBiomeColorToTrees();
+        }
+
+        //bG.inMap_01.width, bG.inMap_01.height, bG.groundMat, bG.hitPoints
+        public void GenerateTextureFromSize()
+        {
+            // Create a new texture
+            Texture2D texture = new Texture2D((int)inMap_01.width, (int)inMap_01.height);
+            texture.filterMode = FilterMode.Point;
+
+            // Generate texture content (here, a simple checkerboard pattern)
+            for (int x = 0; x < texture.width; x++)
+            {
+                for (int y = 0; y < texture.height; y++)
+                {
+                    Color color = hitPoints[x, y].assignedBiome.colors[0];
+                    texture.SetPixel(x, y, color);
+                    Debug.Log(color);
+                }
+            }
+
+            // Apply changes and save the texture
+            texture.Apply();
+            SaveTextureToAssets(texture, "GeneratedTexture");
+
+            // Apply the texture to the material's albedo
+            // material.mainTexture = texture;
+            groundMat.SetTexture("_ColorMap", texture);
+            // Debug.Log(texture);
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(groundMat);
+#endif
+            // Set texture import settings
+            SetTextureImportSettings(texture);
+
+            SetShaderProperties(Mathf.Abs(combinedBounds.min.x) + combinedBounds.max.x, Mathf.Abs(combinedBounds.min.z) + combinedBounds.max.z, combinedBounds.min.x, combinedBounds.min.z, groundMat);
+            // material.SetTexture("_MainTex", texture);
+        }
+
+
+        void SetShaderProperties(float x, float z, float offX, float offZ, Material myMat)
+        {
+            // Make sure to use the exact property names as in your Shader Graph
+            string tilingXPropertyName = "_TilingX";
+            string tilingZPropertyName = "_TilingZ";
+
+            string offsetXPropertyName = "_OffsetX";
+            string offsetZPropertyName = "_OffsetZ";
+
+            // Set the tiling properties on the material
+            myMat.SetFloat(tilingXPropertyName, 1f / x);
+            myMat.SetFloat(tilingZPropertyName, 1f / z);
+
+            myMat.SetFloat(offsetXPropertyName, offX);
+            myMat.SetFloat(offsetZPropertyName, offZ);
+        }
+
+        void SaveTextureToAssets(Texture2D texture, string textureName)
+        {
+            // Convert the texture to a byte array
+            byte[] bytes = texture.EncodeToPNG();
+
+            // Specify the file path for saving in the Assets folder
+            string filePath = Application.dataPath + "/biome_generator/ressources/" + textureName + ".png";
+
+            // Write the bytes to the file
+            System.IO.File.WriteAllBytes(filePath, bytes);
+
+            Debug.Log("Texture saved to: " + filePath);
+        }
+
+        void SetTextureImportSettings(Texture2D texture)
+        {
+            AssetDatabase.Refresh();
+            string assetPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(texture);
+            assetPath = Application.dataPath + "/biome_generator/ressources/" + "GeneratedTexture" + ".png";
+            TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+            Debug.Log("assetPath: " + assetPath);
+            if (textureImporter != null)
+            {
+                textureImporter.textureType = TextureImporterType.Default;
+                textureImporter.npotScale = TextureImporterNPOTScale.None;
+                textureImporter.mipmapEnabled = false;
+                textureImporter.filterMode = FilterMode.Point;
+                textureImporter.textureCompression = TextureImporterCompression.Uncompressed;
+
+                AssetDatabase.ImportAsset(assetPath);
+                AssetDatabase.Refresh();
+            }
+        }
 
         public void SaveHeightMap()
         {
@@ -220,7 +331,7 @@ namespace biome
             foreach (BiomeData b in biomes)
             {
                 b.SetColorOfTreeMaterial();
-                b.SetBushMaterial(b.colors[2]);
+                // b.SetBushMaterial(b.colors[2]);
             }
         }
 

@@ -66,6 +66,12 @@ namespace terrain
         private void Start()
         {
             GenerateTerrain();
+
+            biome.BiomeGenerator biomeGen = GetComponent<biome.BiomeGenerator>();
+            if (biomeGen != null)
+            {
+                biomeGen.GenerateBiomes();
+            }
         }
 
         public void DeleteTerrain()
@@ -86,25 +92,7 @@ namespace terrain
                 }
             }
         }
-        public void GenerateTerrainUnLogged() //MAIN Stack
-        {
-            random = new System.Random(123);
-            DeleteTerrain();
-            // Debug.Log("Terrain generated with maxSlopeHeight: " + maxSlopeHeight);
-            // Add your terrain generation logic here
-            InitializeMap();
 
-            InstantiateTyles();
-            SetTileNeighbours();
-            InstantiatePillars();
-            // SetTylesHeightFromHeightmap();
-            AssignTylesToPillars();
-            SetPillarVerticesFromTyles(maxRandomValue);
-            ContractAllVerticeHeights(maxSlopeHeight);
-            cg.GenerateChunkMeshes();
-
-            LogTerrainGenerationDetails();
-        }
 
         public void GenerateTerrain() //MAIN Stack
         {
