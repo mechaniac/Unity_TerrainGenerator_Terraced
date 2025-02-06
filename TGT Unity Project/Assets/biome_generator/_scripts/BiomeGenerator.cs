@@ -9,6 +9,7 @@ namespace biome
     public class BiomeGenerator : MonoBehaviour
     {
         public bool visualizeRaycasts = true;
+        public bool visualizeHitPoints = true;
 
         public HitPoint[,] hitPoints;
         public Vector2Int heightmapResolution;
@@ -185,10 +186,6 @@ namespace biome
                 }
             }
 
-            foreach (BiomeData d in biomes)
-            {
-                d.SetBushMaterial(d.colors[2]);
-            }
 
             for (int i = 0; i < numRows; i++)
             {
@@ -216,6 +213,7 @@ namespace biome
             foreach (BiomeData b in biomes)
             {
                 b.SetColorOfTreeMaterial();
+                b.SetBushMaterial(b.colors[2]);
             }
         }
 

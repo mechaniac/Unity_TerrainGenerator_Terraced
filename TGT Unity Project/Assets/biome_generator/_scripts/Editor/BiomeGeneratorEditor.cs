@@ -48,9 +48,10 @@ namespace biome
                 bG.InstantiateBiomesFromHitpoints();
             }
 
-            if(GUILayout.Button("Set Terrain Color From HitPoints")){
-                bG.SetTerrainColorFromHitpoints();
-            }
+            // if (GUILayout.Button("Set Terrain Color From HitPoints"))
+            // {
+            //     bG.SetTerrainColorFromHitpoints();
+            // }
 
             if (GUILayout.Button("Instantiate Moss"))
             {
@@ -220,40 +221,41 @@ namespace biome
         [DrawGizmo(GizmoType.Selected)]
         static void DrawGizmos(BiomeGenerator bG, GizmoType gizmoType)
         {
-
-
-
             Handles.color = Color.green;
             Handles.DrawWireCube(bG.combinedBounds.center, bG.combinedBounds.size);
 
-            if (bG.hitPoints != null)
+            if (bG.visualizeHitPoints)
             {
-                // Debug.Log("drawing Gizmos");
-                for (int i = 0; i < bG.hitPoints.GetLength(0); i++)
+                if (bG.hitPoints != null)
                 {
-                    for (int j = 0; j < bG.hitPoints.GetLength(1); j++)
+                    // Debug.Log("drawing Gizmos");
+                    for (int i = 0; i < bG.hitPoints.GetLength(0); i++)
                     {
-                        if (bG.hitPoints[i, j].assignedBiome != null)
+                        for (int j = 0; j < bG.hitPoints.GetLength(1); j++)
                         {
-                            Handles.color = bG.hitPoints[i, j].assignedBiome.idColor;
-                            if (bG.hitPoints[i, j].isRock)
+                            if (bG.hitPoints[i, j].assignedBiome != null)
                             {
-                                Handles.color = Color.black;
+                                Handles.color = bG.hitPoints[i, j].assignedBiome.idColor;
+                                if (bG.hitPoints[i, j].isRock)
+                                {
+                                    Handles.color = Color.black;
+                                }
                             }
-                        }
-                        Handles.DrawSolidDisc(bG.hitPoints[i, j].worldPosition + new Vector3(0f, bG.hitPoints[i, j].biomeIntensity, 0f), Vector3.up, bG.hitPoints[i, j].biomeIntensity);
+                            Handles.DrawSolidDisc(bG.hitPoints[i, j].worldPosition + new Vector3(0f, bG.hitPoints[i, j].biomeIntensity, 0f), Vector3.up, bG.hitPoints[i, j].biomeIntensity);
 
-                        if (bG.hitPoints[i, j].terrainPoints != null)
-                        {
-                            for (int tP = 0; tP < bG.hitPoints[i, j].terrainPoints.Length; tP++)
+                            if (bG.hitPoints[i, j].terrainPoints != null)
                             {
-                                Vector3 tPP = bG.hitPoints[i, j].terrainPoints[tP];
-                                Handles.DrawWireDisc(tPP + new Vector3(0f, bG.hitPoints[i, j].biomeIntensity, 0f), Vector3.up, .1f);
+                                for (int tP = 0; tP < bG.hitPoints[i, j].terrainPoints.Length; tP++)
+                                {
+                                    Vector3 tPP = bG.hitPoints[i, j].terrainPoints[tP];
+                                    Handles.DrawWireDisc(tPP + new Vector3(0f, bG.hitPoints[i, j].biomeIntensity, 0f), Vector3.up, .1f);
+                                }
                             }
                         }
                     }
                 }
             }
+
 
             if (!bG.visualizeRaycasts || bG.combinedBounds == null)
                 return;
@@ -262,6 +264,7 @@ namespace biome
             // Also, numPointsX and numPointsZ should be set accordingly.
             if (bG.combinedBounds.size == Vector3.zero)
                 return;
+
 
             VisualizeRaycasts(bG.combinedBounds, bG.inMap_01.width, bG.inMap_01.height);
 

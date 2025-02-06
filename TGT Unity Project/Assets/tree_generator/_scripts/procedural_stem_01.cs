@@ -194,7 +194,7 @@ namespace tree_gen
 
                 // Interpolate position and rotation between the current and next path points
                 Vector3 interpolatedPosition = Vector3.Lerp(pathPoints[segmentIndex].position, pathPoints[Mathf.Min(segmentIndex + 1, pathPoints.Length - 1)].position, segmentT);
-                Debug.Log(interpolatedPosition);
+                // Debug.Log(interpolatedPosition);
                 Quaternion interpolatedRotation = Quaternion.Slerp(pathPoints[segmentIndex].rotation, pathPoints[Mathf.Min(segmentIndex + 1, pathPoints.Length - 1)].rotation, segmentT);
 
                 // Debug.Log("highestPoint: " + pathPoints[pathPoints.Length - 1].transform.position.y);

@@ -135,21 +135,7 @@ namespace biome
             mossMatToAssign = m; //set back to material to assign to moss
         }
 
-        public void SetBushMaterial(Color c)
-        {
-            if (bushMat == null) return;
 
-            Material m = new Material(bushMat);
-            if (m != null)
-            {
-                m.SetColor("_BaseColor", c);
-            }
-            else
-            {
-                Debug.LogWarning("Material not assigned.");
-            }
-            bushMatToAssign = m;
-        }
 
         public GameObject InstantiateMossFromBiome(System.Random r, HitPoint h, int mossPrefab)
         { // 0 = small, 1 = medium, 2 = big
@@ -279,8 +265,14 @@ namespace biome
             {
                 treeMat.SetColor("_ColorBase", colors[0]);
                 treeMat.SetColor("_ColorMasked", colors[1]);
+                Debug.Log($"treeMat: {treeMat}, color0: {colors[0]}, color1: {colors[1]}");
             }
-
+        }
+        public void SetBushMaterial(Color c)
+        {
+            if (bushMat != null) {
+                bushMat.SetColor("_BaseColor", c);
+            }
         }
     }
 }
