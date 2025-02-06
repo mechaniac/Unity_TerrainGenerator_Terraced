@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 namespace biome
 {
@@ -27,7 +28,8 @@ namespace biome
             }
             if (GUILayout.Button("Log HitPoints"))
             {
-                bG.LogHitpoints();
+                string message = bG.LogHitpoints();
+                File.AppendAllText("BiomeGenerationLog.txt", message + "\n");
             }
             if (GUILayout.Button("log"))
             {
@@ -139,6 +141,7 @@ namespace biome
         {
             // Create a new texture
             Texture2D texture = new Texture2D((int)width, (int)height);
+            texture.filterMode = FilterMode.Point;
 
             // Generate texture content (here, a simple checkerboard pattern)
             for (int x = 0; x < texture.width; x++)

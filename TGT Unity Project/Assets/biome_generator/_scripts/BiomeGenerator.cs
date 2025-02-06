@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
 using System.IO;
+using System.Text; 
 
 namespace biome
 {
@@ -96,13 +97,15 @@ namespace biome
             return null;
         }
 
-        public void LogHitpoints()
+        public string LogHitpoints()
         {
             if (hitPoints == null)
             {
                 Debug.LogWarning("HitPoints array is null.");
-                return;
+                return string.Empty;
             }
+
+            StringBuilder sb = new StringBuilder();
 
             int numRows = hitPoints.GetLength(0);
             int numCols = hitPoints.GetLength(1);
@@ -111,9 +114,13 @@ namespace biome
             {
                 for (int j = 0; j < numCols; j++)
                 {
-                    Debug.Log(hitPoints[i, j]);
+                    string hitPointString = hitPoints[i, j].ToString();
+                    Debug.Log(hitPointString);
+                    sb.AppendLine(hitPointString);
                 }
             }
+
+            return sb.ToString();
         }
 
 
@@ -464,7 +471,8 @@ namespace biome
         /// <returns>The generated Texture2D</returns>
         public Texture2D GenerateColorTextureFromHitPoints(HitPoint[,] hitPoints, BiomeData defaultBiome)
         {
-            if(hitPoints == null){
+            if (hitPoints == null)
+            {
                 GenerateHitPoints();
             }
 
@@ -732,10 +740,10 @@ namespace biome
 
         public override string ToString()
         {
-            string terrainPointsString = (terrainPoints != null) ? $"Terrain Points: {string.Join(", ", terrainPoints)}" : "Terrain Points: null";
+            // string terrainPointsString = (terrainPoints != null) ? $"Terrain Points: {string.Join(", ", terrainPoints)}" : "Terrain Points: null"; //removed from string because unused, see above
             string assignedBiomeString = (assignedBiome != null) ? $"Biome: {assignedBiome}, Intensity: {biomeIntensity} " : "Biome: null";
 
-            return $"ID: {id}, pos: {worldPosition}, Col: {pointColor}, HSL: {pointColorHSL}, {terrainPointsString}, {assignedBiomeString}, Is Set: {isSet}, parentGO: {parentTerrain}";
+            return $"ID: {id}, pos: {worldPosition}, Col: {pointColor}, HSL: {pointColorHSL}, {assignedBiomeString}, Is Set: {isSet}, parentGO: {parentTerrain}";
         }
         public void SetBiomeFromColor(BiomeData[] biomes, ColorHSL cHSL)
         {

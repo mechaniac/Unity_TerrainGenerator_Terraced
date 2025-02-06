@@ -36,7 +36,7 @@ namespace biome
         {
             if (td == null || td.Length == 0)
             {
-                Debug.Log("no treeData set in biome");
+                // Debug.Log("no treeData set in biome");
                 return null;
             }
             else
@@ -270,8 +270,8 @@ namespace biome
         }
         public void SetBushMaterial(Color c)
         {
-            if (bushMat != null) {
-                bushMat.SetColor("_BaseColor", c);
+            if (bushMatToAssign != null) {
+                bushMatToAssign.SetColor("_BaseColor", c);
             }
         }
     }
