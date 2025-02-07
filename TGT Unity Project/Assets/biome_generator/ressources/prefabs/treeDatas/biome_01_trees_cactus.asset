@@ -27,4 +27,4 @@ MonoBehaviour:
   bushes_01:
   - {fileID: 5082219629448854966, guid: e2b85b31b020bbc4eba173b887fb523e, type: 3}
   treeSize: 0.5
-  bushSize: 1
+  bushSize: 0.3

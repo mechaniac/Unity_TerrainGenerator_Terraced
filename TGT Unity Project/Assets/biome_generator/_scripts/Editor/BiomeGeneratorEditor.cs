@@ -62,7 +62,7 @@ namespace biome
 
             if (GUILayout.Button("Set Ground Colormap"))
             {
-                CreateColorMapFromBiomes();
+                bG.GenerateGroundColorMap();
             }
 
             if (GUILayout.Button("Set Tree Colors"))
@@ -136,94 +136,8 @@ namespace biome
         }
 
 
-        void CreateColorMapFromBiomes()
-        {
-            GenerateTextureFromSize(bG.inMap_01.width, bG.inMap_01.height, bG.groundMat, bG.hitPoints);
-        }
 
-        void GenerateTextureFromSize(float width, float height, Material material, HitPoint[,] hitPoints)
-        {
-            // Create a new texture
-            Texture2D texture = new Texture2D((int)width, (int)height);
-            texture.filterMode = FilterMode.Point;
 
-            // Generate texture content (here, a simple checkerboard pattern)
-            for (int x = 0; x < texture.width; x++)
-            {
-                for (int y = 0; y < texture.height; y++)
-                {
-                    Color color = hitPoints[x, y].assignedBiome.colors[0];
-                    texture.SetPixel(x, y, color);
-                    Debug.Log(color);
-                }
-            }
-
-            // Apply changes and save the texture
-            texture.Apply();
-            SaveTextureToAssets(texture, "GeneratedTexture");
-
-            // Apply the texture to the material's albedo
-            // material.mainTexture = texture;
-            material.SetTexture("_ColorMap", texture);
-            // Debug.Log(texture);
-
-            // Set texture import settings
-            SetTextureImportSettings(texture);
-
-            SetShaderProperties(Mathf.Abs(bG.combinedBounds.min.x) + bG.combinedBounds.max.x, Mathf.Abs(bG.combinedBounds.min.z) + bG.combinedBounds.max.z, bG.combinedBounds.min.x, bG.combinedBounds.min.z, bG.groundMat);
-            // material.SetTexture("_MainTex", texture);
-        }
-
-        void SetShaderProperties(float x, float z, float offX, float offZ, Material myMat)
-        {
-            // Make sure to use the exact property names as in your Shader Graph
-            string tilingXPropertyName = "_TilingX";
-            string tilingZPropertyName = "_TilingZ";
-
-            string offsetXPropertyName = "_OffsetX";
-            string offsetZPropertyName = "_OffsetZ";
-
-            // Set the tiling properties on the material
-            myMat.SetFloat(tilingXPropertyName, 1f / x);
-            myMat.SetFloat(tilingZPropertyName, 1f / z);
-
-            myMat.SetFloat(offsetXPropertyName, offX);
-            myMat.SetFloat(offsetZPropertyName, offZ);
-        }
-
-        void SaveTextureToAssets(Texture2D texture, string textureName)
-        {
-            // Convert the texture to a byte array
-            byte[] bytes = texture.EncodeToPNG();
-
-            // Specify the file path for saving in the Assets folder
-            string filePath = Application.dataPath + "/biome_generator/ressources/" + textureName + ".png";
-
-            // Write the bytes to the file
-            System.IO.File.WriteAllBytes(filePath, bytes);
-
-            Debug.Log("Texture saved to: " + filePath);
-        }
-
-        void SetTextureImportSettings(Texture2D texture)
-        {
-            AssetDatabase.Refresh();
-            string assetPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(texture);
-            assetPath = Application.dataPath + "/biome_generator/ressources/" + "GeneratedTexture" + ".png";
-            TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
-            Debug.Log("assetPath: " + assetPath);
-            if (textureImporter != null)
-            {
-                textureImporter.textureType = TextureImporterType.Default;
-                textureImporter.npotScale = TextureImporterNPOTScale.None;
-                textureImporter.mipmapEnabled = false;
-                textureImporter.filterMode = FilterMode.Point;
-                textureImporter.textureCompression = TextureImporterCompression.Uncompressed;
-
-                AssetDatabase.ImportAsset(assetPath);
-                AssetDatabase.Refresh();
-            }
-        }
 
         [DrawGizmo(GizmoType.Selected)]
         static void DrawGizmos(BiomeGenerator bG, GizmoType gizmoType)
@@ -271,7 +185,6 @@ namespace biome
             // Also, numPointsX and numPointsZ should be set accordingly.
             if (bG.combinedBounds.size == Vector3.zero)
                 return;
-
 
             VisualizeRaycasts(bG.combinedBounds, bG.inMap_01.width, bG.inMap_01.height);
 

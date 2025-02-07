@@ -41,22 +41,19 @@ namespace biome
             }
             else
             {
-
                 if (td[0] != null)
                 {
                     return td[0].InstantiateTree(r, h, cutoff_small, cutoff_medium);
                 }
                 return null;
-
             }
-
         }
 
         public GameObject[] InstantiateBushesFromBiome(System.Random r, HitPoint h, float upperBound)
         {
             if (td == null || td.Length == 0)
             {
-                Debug.Log("no treeData set in biome");
+                // Debug.Log("no treeData set in biome");
                 return null;
             }
             else
@@ -83,17 +80,6 @@ namespace biome
             }
         }
 
-        Vector3 GetGroundPointFromRay(Vector3 rayStartPoint)
-        {
-            if (Physics.Raycast(rayStartPoint, Vector3.down, out RaycastHit hit, 200, LayerMask.GetMask("ground")))
-            {
-                return hit.point;
-            }
-            else
-            {
-                return Vector3.zero;
-            }
-        }
 
         Vector3[] GetCircularPositionsFromCenter(int amount, Vector3 center, float radius, float yPosition)
         {
@@ -118,6 +104,18 @@ namespace biome
 
             return positions;
         }
+        Vector3 GetGroundPointFromRay(Vector3 rayStartPoint)
+        {
+            if (Physics.Raycast(rayStartPoint, Vector3.down, out RaycastHit hit, 200, LayerMask.GetMask("ground")))
+            {
+                return hit.point;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
+        }
+
 
         public void SetMossMaterial(Color c)
         {
@@ -271,7 +269,8 @@ namespace biome
         }
         public void SetBushMaterial(Color c)
         {
-            if (bushMat != null) {
+            if (bushMat != null)
+            {
                 bushMat.SetColor("_BaseColor", c);
             }
         }

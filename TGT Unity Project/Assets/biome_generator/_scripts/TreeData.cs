@@ -22,7 +22,7 @@ namespace biome
         {
             if (trees_big == null)
             {
-                Debug.LogWarning("no tree set in TreeData");
+                // Debug.LogWarning("no tree set in TreeData");
                 return null;
             }
 

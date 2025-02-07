@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
-// using UnityEngine;
+using UnityEngine;
 using System.IO;
 using System.Text;
-// using UnityEditor;
+using UnityEditor;
 using UnityEngine.VFX;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-using UnityEngine;
+
 
 namespace biome
 {
@@ -53,12 +50,12 @@ namespace biome
         {
             GenerateHitPoints();
             InstantiateBiomesFromHitpoints();
-            GenerateTextureFromSize();
+            GenerateGroundColorMap();
             SetBiomeColorToTrees();
         }
 
         //bG.inMap_01.width, bG.inMap_01.height, bG.groundMat, bG.hitPoints
-        public void GenerateTextureFromSize()
+        public void GenerateGroundColorMap()
         {
             // Create a new texture
             Texture2D texture = new Texture2D((int)inMap_01.width, (int)inMap_01.height);
@@ -83,9 +80,7 @@ namespace biome
             // material.mainTexture = texture;
             groundMat.SetTexture("_ColorMap", texture);
             // Debug.Log(texture);
-#if UNITY_EDITOR
-            EditorUtility.SetDirty(groundMat);
-#endif
+
             // Set texture import settings
             SetTextureImportSettings(texture);
 
@@ -268,7 +263,7 @@ namespace biome
 
 
 
-        public void InstantiateBiomesFromHitpoints()
+        public void  InstantiateBiomesFromHitpoints()
         {
             DeleteBiomes();
             r = new System.Random(123);
@@ -293,24 +288,12 @@ namespace biome
                 {
                     if (hitPoints[i, j].assignedBiome != null)
                     {
-                        GameObject instantiatedTree = hitPoints[i, j].assignedBiome.InstantiateTreeFromBiome(r, hitPoints[i, j]);
-                        if (instantiatedTree != null && hitPoints[i, j].parentTerrain != null)
+                        GameObject t = hitPoints[i, j].assignedBiome.InstantiateTreeFromBiome(r, hitPoints[i, j]);
+                        if (t != null && hitPoints[i, j].parentTerrain != null)
                         {
-                            instantiatedTree.transform.parent = hitPoints[i, j].parentTerrain.transform;
+                            t.transform.parent = hitPoints[i, j].parentTerrain.transform;
                         }
 
-                    }
-
-                }
-            }
-
-
-            for (int i = 0; i < numRows; i++)
-            {
-                for (int j = 0; j < numCols; j++)
-                {
-                    if (hitPoints[i, j].assignedBiome != null)
-                    {
                         GameObject[] b = hitPoints[i, j].assignedBiome.InstantiateBushesFromBiome(r, hitPoints[i, j], combinedBounds.max.y);
                         if (b != null && hitPoints[i, j].parentTerrain != null)
                         {
@@ -324,6 +307,7 @@ namespace biome
 
                 }
             }
+
         }
 
         public void SetBiomeColorToTrees()
@@ -442,8 +426,8 @@ namespace biome
             LayerMask groundMask = LayerMask.GetMask("ground");
             LayerMask rockMask = LayerMask.GetMask("rock");
 
-            Debug.Log("groundMask: " + groundMask.value);
-            Debug.Log("rockmask; " + rockMask.value);
+            // Debug.Log("groundMask: " + groundMask.value);
+            // Debug.Log("rockmask; " + rockMask.value);
 
             LayerMask combinedMask = groundMask | rockMask;
 
@@ -829,7 +813,7 @@ namespace biome
         }
         public Vector2Int id;
         public Vector3 worldPosition;
-        public Vector3[] terrainPoints; //filled but unused. was initial idea for moss generation. now replaced by meshes which get raycasted down per vertex
+        public Vector3[] terrainPoints; //bushPoints
         public Vector3 worldNormal;
         public Color pointColor;
         public ColorHSL pointColorHSL; //custom struct to make colors compareable
@@ -851,10 +835,10 @@ namespace biome
 
         public override string ToString()
         {
-            // string terrainPointsString = (terrainPoints != null) ? $"Terrain Points: {string.Join(", ", terrainPoints)}" : "Terrain Points: null"; //removed from string because unused, see above
+            string terrainPointsString = (terrainPoints != null) ? $"Terrain Points: {string.Join(", ", terrainPoints)}" : "Terrain Points: null"; 
             string assignedBiomeString = (assignedBiome != null) ? $"Biome: {assignedBiome}, Intensity: {biomeIntensity} " : "Biome: null";
 
-            return $"ID: {id}, pos: {worldPosition}, Col: {pointColor}, HSL: {pointColorHSL}, {assignedBiomeString}, Is Set: {isSet}, parentGO: {parentTerrain}";
+            return $"ID: {id}, pos: {worldPosition}, Col: {pointColor}, HSL: {pointColorHSL}, {assignedBiomeString}, terrainPoints: {terrainPointsString}, Is Set: {isSet}, parentGO: {parentTerrain}";
         }
         public void SetBiomeFromColor(BiomeData[] biomes, ColorHSL cHSL)
         {
@@ -914,11 +898,11 @@ namespace biome
             }
             else if (max == g)
             {
-                h = (60 * (b - r) / (max - min) + 120);
+                h = 60 * (b - r) / (max - min) + 120;
             }
             else if (max == b)
             {
-                h = (60 * (r - g) / (max - min) + 240);
+                h = 60 * (r - g) / (max - min) + 240; 
             }
 
             float l = (max + min) / 2;

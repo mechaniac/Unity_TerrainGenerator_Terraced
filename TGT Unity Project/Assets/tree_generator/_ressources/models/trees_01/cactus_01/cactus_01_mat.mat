@@ -162,8 +162,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.7353569, g: 0.7353569, b: 0.7353569, a: 1}
     - _Color: {r: 0.7353569, g: 0.7353569, b: 0.7353569, a: 1}
-    - _ColorBase: {r: 0, g: 0.49127674, b: 1, a: 1}
-    - _ColorMasked: {r: 1, g: 0.4321409, b: 0, a: 1}
+    - _ColorBase: {r: 0.6132076, g: 0.49254343, b: 0.28635636, a: 1}
+    - _ColorMasked: {r: 0.7264151, g: 0.5569048, b: 0.42831078, a: 1}
     - _DetailBaseSpecularColor: {r: 0.6415094, g: 0.32983267, b: 0.32983267, a: 0}
     - _DetailMaskedSpecularColor: {r: 0.53773576, g: 0.53773576, b: 0.53773576, a: 0}
     - _DetailMaskedTiling: {r: 4, g: 4, b: 0, a: 0}
